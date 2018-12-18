@@ -1,5 +1,5 @@
 {
-  "name": "SoleSS/yii2-simple-cms",
+  "name": "soless/yii2-simple-cms",
 
   "type": "yii2-extension",
 
@@ -7,7 +7,7 @@
   "keywords": ["yii2", "CMS" ],
   "license": "BSD-3-Clause",
   "support": {
-    "source": "https://github.com/SoleSS/yii2-simple-cms"
+    "source": "https://github.com/soless/yii2-simple-cms"
   },
   "authors": [
     {
