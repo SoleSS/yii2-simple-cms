@@ -1,13 +1,13 @@
 <?php
 
-namespace SoleSS\cms;
+namespace soless\cms;
 
 class Module extends \yii\base\Module
 {
     /**
      * @inheritdoc
      */
-    public $controllerNamespace = 'SoleSS\cms\controllers';
+    public $controllerNamespace = 'soless\cms\controllers';
 
     /**
      * @inheritdoc
@@ -17,7 +17,7 @@ class Module extends \yii\base\Module
         parent::init();
 
         if (Yii::$app instanceof \yii\console\Application) {
-            $this->controllerNamespace = 'SoleSS\cms\commands';
+            $this->controllerNamespace = 'soless\cms\commands';
         }
 
         // custom initialization code goes here
