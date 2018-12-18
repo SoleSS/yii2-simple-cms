@@ -2,4 +2,4 @@
 
 ## Installation
 
-composer require soless/yii2-simple-cms
+composer require --prefer-dist soless/yii2-simple-cms "*"
