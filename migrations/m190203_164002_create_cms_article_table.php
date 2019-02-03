@@ -1,4 +1,5 @@
 <?php
+namespace \soless\cms\migrations;
 
 use yii\db\Migration;
 
