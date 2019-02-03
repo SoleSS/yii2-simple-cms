@@ -4,4 +4,4 @@
 
 composer require --prefer-dist soless/yii2-simple-cms "*"
 
-php yii migrate/up --migrationPath=@vendor/soless/cms/migrations
+php yii migrate/up --migrationPath=@vendor/soless/yii2-simple-cms/migrations
