@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models\base;
+namespace soless\cms\models\base;
 
 /**
  * User ActiveRecord model.
