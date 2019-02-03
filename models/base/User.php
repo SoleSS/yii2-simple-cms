@@ -35,7 +35,7 @@ namespace soless\cms\models\base;
  *
  * @author Dmitry Erofeev <dmeroff@gmail.com>
  */
-class User extends dektrium\user\models\User
+class User extends \dektrium\user\models\User
 {
 
 }
