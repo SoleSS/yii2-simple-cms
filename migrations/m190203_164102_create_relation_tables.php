@@ -1,6 +1,4 @@
 <?php
-namespace \soless\cms\migrations;
-
 use yii\db\Migration;
 
 class m190203_164102_create_relation_tables extends Migration

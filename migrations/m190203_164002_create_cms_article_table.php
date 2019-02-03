@@ -1,6 +1,4 @@
 <?php
-namespace \soless\cms\migrations;
-
 use yii\db\Migration;
 
 class m190203_164002_create_cms_article_table extends Migration
