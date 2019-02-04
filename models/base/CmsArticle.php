@@ -37,6 +37,7 @@ use Yii;
  * @property string $meta_description Meta description
  * @property int $hits Кол-во просмотров
  * @property array $medias Медиа контент
+ * @property array $gallery Галерея
  * @property string $created_at Дата создания
  * @property string $updated_at Дата обновления
  *
@@ -67,7 +68,7 @@ class CmsArticle extends \yii\db\ActiveRecord
             [['title', 'intro', 'full', 'publish_up', 'publish_down', 'created_at', 'updated_at'], 'required'],
             [['type_id', 'image_width', 'image_height', 'show_image', 'published', 'user_id', 'hits'], 'integer'],
             [['full', 'full_lng1', 'full_lng2', 'amp_full', 'amp_full_lng1', 'amp_full_lng2'], 'string'],
-            [['publish_up', 'publish_down', 'medias', 'created_at', 'updated_at'], 'safe'],
+            [['publish_up', 'publish_down', 'medias', 'gallery', 'created_at', 'updated_at'], 'safe'],
             [['title', 'title_lng1', 'title_lng2', 'subtitle', 'subtitle_lng1', 'subtitle_lng2', 'user_alias'], 'string', 'max' => 255],
             [['image'], 'string', 'max' => 512],
             [['intro', 'intro_lng1', 'intro_lng2', 'meta_keywords'], 'string', 'max' => 1024],
@@ -112,6 +113,7 @@ class CmsArticle extends \yii\db\ActiveRecord
             'meta_description' => 'Meta description',
             'hits' => 'Кол-во просмотров',
             'medias' => 'Медиа контент',
+            'gallery' => 'Галерея',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
         ];

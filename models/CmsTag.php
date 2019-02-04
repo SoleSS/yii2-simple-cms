@@ -19,5 +19,15 @@ namespace soless\cms\models;
  */
 class CmsTag extends base\CmsTag
 {
+    public function beforeValidate()
+    {
+        if ($this->isNewRecord) {
+            $this->created_at = date('Y-m-d H:i:s');
+        }
+        $this->updated_at = date('Y-m-d H:i:s');
+
+        parent::beforeValidate();
+    }
+
 
 }

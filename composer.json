@@ -18,6 +18,7 @@
 
   "require": {
     "yiisoft/yii2": "~2.0.0",
+    "kartik-v/yii2-widget-select2": "@dev",
     "mihaildev/yii2-ckeditor": "*",
     "mihaildev/yii2-elfinder": "*",
     "unclead/yii2-multiple-input": "~2.0",

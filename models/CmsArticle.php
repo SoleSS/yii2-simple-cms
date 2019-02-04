@@ -36,6 +36,7 @@ namespace soless\cms\models;
  * @property string $meta_description Meta description
  * @property int $hits Кол-во просмотров
  * @property array $medias Медиа контент
+ * @property array $gallery Галерея
  * @property string $created_at Дата создания
  * @property string $updated_at Дата обновления
  *
@@ -49,5 +50,20 @@ namespace soless\cms\models;
  */
 class CmsArticle extends base\CmsArticle
 {
+    public function beforeValidate()
+    {
+        if ($this->isNewRecord) {
+            $this->created_at = date('Y-m-d H:i:s');
+        }
+        $this->updated_at = date('Y-m-d H:i:s');
 
+        parent::beforeValidate();
+    }
+
+    public function afterFind()
+    {
+        $this->updateCounters(['hits' => 1]);
+
+        parent::afterFind();
+    }
 }

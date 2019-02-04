@@ -8,6 +8,11 @@ class m190203_164002_create_cms_article_table extends Migration
      */
     public function safeUp()
     {
+        $options = null;
+        if ($this->db->driverName === 'mysql') {
+            $options = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
+
         $this->createTable('cms_article', [
             'id' => $this->primaryKey(),
             'title' => $this->string(255)->notNull()->comment('Заголовок'),
@@ -39,9 +44,10 @@ class m190203_164002_create_cms_article_table extends Migration
             'meta_description' => $this->string(2048)->comment('Meta description'),
             'hits' => $this->integer()->notNull()->defaultValue(0)->comment('Кол-во просмотров'),
             'medias' => $this->json()->comment('Медиа контент'),
+            'gallery' => $this->json()->comment('Галерея'),
             'created_at' => $this->datetime()->notNull()->comment('Дата создания'),
             'updated_at' => $this->datetime()->notNull()->comment('Дата обновления'),
-        ]);
+        ], $options);
 
         $this->createIndex('idx-cms_article-type_id', 'cms_article', 'type_id');
         $this->createIndex('idx-cms_article-published', 'cms_article', 'published');
