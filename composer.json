@@ -18,12 +18,12 @@
 
   "require": {
     "yiisoft/yii2": "~2.0.0",
+    "kartik-v/yii2-widget-datetimepicker": "*",
     "kartik-v/yii2-widget-select2": "@dev",
     "mihaildev/yii2-ckeditor": "*",
     "mihaildev/yii2-elfinder": "*",
     "unclead/yii2-multiple-input": "~2.0",
-    "dektrium/yii2-user": "^0.9.14",
-    "dektrium/yii2-rbac": "1.0.0-alpha@dev"
+    "tolik505/yii2-tag-editor": "@dev"
   },
 
   "autoload": {

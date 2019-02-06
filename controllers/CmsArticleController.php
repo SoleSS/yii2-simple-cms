@@ -26,6 +26,17 @@ class CmsArticleController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['index', 'create', 'update', 'delete', 'view', ],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'create', 'update', 'delete', 'view', ],
+                        'allow' => true,
+                        'roles' => ['Administrator', 'CmsArticleAdmin', ],
+                    ],
+                ],
+            ],
         ];
     }
 

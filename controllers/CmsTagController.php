@@ -26,6 +26,17 @@ class CmsTagController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['index', 'create', 'update', 'delete', 'view', ],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'create', 'update', 'delete', 'view', ],
+                        'allow' => true,
+                        'roles' => ['Administrator', 'CmsTagAdmin', ],
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -123,5 +134,16 @@ class CmsTagController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+
+    /**
+     * Возвращает список похожих тегов
+     * @param $term
+     * @return mixed
+     */
+    public function actionSuggest($term) {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return CmsTag::find()->select('title')->filterWhere(['like', 'title', $term.'%', false])->column();
     }
 }

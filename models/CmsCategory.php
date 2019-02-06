@@ -25,4 +25,8 @@ class CmsCategory extends base\CmsCategory
 
         parent::beforeValidate();
     }
+
+    public static function asArray() {
+        return \yii\helpers\ArrayHelper::map(static::find()->select(['id', 'title'])->asArray()->all(), 'id', 'title');
+    }
 }

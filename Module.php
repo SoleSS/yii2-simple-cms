@@ -16,7 +16,7 @@ class Module extends \yii\base\Module
     {
         parent::init();
 
-        if (Yii::$app instanceof \yii\console\Application) {
+        if (\Yii::$app instanceof \yii\console\Application) {
             $this->controllerNamespace = 'soless\cms\commands';
         }
 
