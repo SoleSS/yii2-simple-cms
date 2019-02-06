@@ -6,7 +6,7 @@ use \mihaildev\elfinder\InputFile;
 use \mihaildev\elfinder\ElFinder;
 use \mihaildev\ckeditor\CKEditor;
 use \kartik\datetime\DateTimePicker;
-use \tolik505\tagEditor\TagEditor;
+use \soless\tagEditor\TagEditor;
 
 
 /* @var $this yii\web\View */
