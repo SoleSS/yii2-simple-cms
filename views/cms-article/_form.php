@@ -83,7 +83,7 @@ use \tolik505\tagEditor\TagEditor;
         </div>
     </div>
 
-    <?= $form->field($model, 'selectedCategories')->checkboxList(\soless\models\CmsCategory::asArray()); ?>
+    <?= $form->field($model, 'selectedCategories')->checkboxList(\soless\cms\models\CmsCategory::asArray()); ?>
 
     <div class="panel-group">
         <div class="panel panel-default">
