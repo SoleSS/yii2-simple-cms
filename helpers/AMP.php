@@ -1,5 +1,5 @@
 <?php
-namespace \soless\cms\helpers;
+namespace soless\cms\helpers;
 
 class AMP {
     public static function encode($content) {

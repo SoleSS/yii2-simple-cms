@@ -88,6 +88,8 @@ class CmsArticle extends base\CmsArticle
         $labels['selectedCategories'] = 'Категории';
         $labels['selectedTags'] = 'Теги';
         $labels['selectedRelatedTags'] = 'Теги для связывания материалов';
+
+        return $labels;
     }
 
     public function beforeValidate()
