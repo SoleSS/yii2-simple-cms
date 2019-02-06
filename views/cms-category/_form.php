@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use \mihaildev\elfinder\InputFile;
+use \mihaildev\elfinder\ElFinder;
+use \mihaildev\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
 /* @var $model soless\cms\models\CmsCategory */
@@ -14,14 +17,18 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?= $form->field($model, 'description')->widget(CKEditor::className(), [
+        'editorOptions' => ElFinder::ckeditorOptions('elfinder', [
+            'preset' => 'basic',
+            'inline' => false,
+            'height' => '100px',
+            'allowedContent' => false,
+            'removePlugins' => 'image',
+        ]),
+    ]); ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

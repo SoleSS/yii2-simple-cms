@@ -22,6 +22,7 @@ use \yii\helpers\Url;
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'type_id')->textInput() ?>
+    <?= $form->field($model, 'type_id')->dropDownList(\soless\cms\models\CmsArticle::TYPE_NAME) ?>
 
     <?= $form->field($model, 'subtitle')->textInput(['maxlength' => true]) ?>
 
@@ -48,7 +49,14 @@ use \yii\helpers\Url;
         ]),
     ]); ?>
 
-    <?= $form->field($model, 'full')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'full')->widget(CKEditor::className(), [
+        'editorOptions' => ElFinder::ckeditorOptions('elfinder', [
+            'preset' => 'standard',
+            'inline' => false,
+            'height' => '300px',
+            'allowedContent' => false,
+        ]),
+    ]); ?>
 
     <div class="panel-group">
         <div class="panel panel-default">
@@ -162,7 +170,7 @@ use \yii\helpers\Url;
 
     <?= $form->field($model, 'meta_keywords')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'meta_description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'meta_description')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
