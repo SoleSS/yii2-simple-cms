@@ -82,6 +82,13 @@ class CmsArticle extends base\CmsArticle
     public $selectedTags;
     public $selectedRelatedTags;
 
+    public function attributeLabels()
+    {
+        $labels = parent::attributeLabels();
+        $labels['selectedCategories'] = 'Категории';
+        $labels['selectedTags'] = 'Теги';
+        $labels['selectedRelatedTags'] = 'Теги для связывания материалов';
+    }
 
     public function beforeValidate()
     {
@@ -116,8 +123,8 @@ class CmsArticle extends base\CmsArticle
 
     private function getImageParams() {
         $imageSize = [];
-        if (file_exists($this->image)) {
-            $imageSize = getimagesize($this->image);
+        if (file_exists(\Yii::getAlias('@app') .'/web'. $this->image)) {
+            $imageSize = getimagesize(\Yii::getAlias('@app') .'/web'. $this->image);
         }
 
         return $imageSize;

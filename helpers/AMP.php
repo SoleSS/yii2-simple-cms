@@ -13,7 +13,7 @@ class AMP {
 
             $imageSize = [];
             try {
-                $imageSize = getimagesize($tmp[1]);
+                $imageSize = getimagesize(\Yii::getAlias('@app') .'/web'. $tmp[1]);
             } catch (\Exception $exception) {
                 // TODO: \Yii::error() ?
             }

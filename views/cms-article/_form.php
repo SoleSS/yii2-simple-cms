@@ -21,7 +21,6 @@ use \yii\helpers\Url;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'type_id')->textInput() ?>
     <?= $form->field($model, 'type_id')->dropDownList(\soless\cms\models\CmsArticle::TYPE_NAME) ?>
 
     <?= $form->field($model, 'subtitle')->textInput(['maxlength' => true]) ?>
