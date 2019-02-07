@@ -45,8 +45,6 @@ use \soless\cms\helpers\AMP;
  * @property CmsCategory[] $cmsCategories
  * @property CmsArticleRelated[] $cmsArticleRelateds
  * @property CmsTag[] $cmsTags
- * @property CmsTag[] $tags
- * @property CmsTag[] $relatedTags
  * @property CmsArticleTag[] $cmsArticleTags
  * @property CmsTag[] $cmsTags0
  */
@@ -100,8 +98,8 @@ class CmsArticle extends base\CmsArticle
         }
         $this->updated_at = date('Y-m-d H:i:s');
         $imageSize = $this->getImageParams();
-        $this->image_width = $imageSize[0];
-        $this->image_height = $imageSize[1];
+        $this->image_width = isset($imageSize[0]) ? $imageSize[0] : null;
+        $this->image_height = isset($imageSize[1]) ? $imageSize[1] : null;
         $this->amp_full = AMP::encode($this->full);
 
         if (!empty($this->full_lng1)) {
@@ -123,6 +121,16 @@ class CmsArticle extends base\CmsArticle
         $this->setRelatedTags();
     }
 
+    public function afterFind()
+    {
+        $this->updateCounters(['hits' => 1]);
+        $this->selectedCategories = \yii\helpers\ArrayHelper::getColumn($this->cmsArticleCategories, 'id');
+        $this->selectedRelatedTags = implode(',', \yii\helpers\ArrayHelper::getColumn($this->relatedTags, 'title'));
+        $this->selectedTags = implode(',', \yii\helpers\ArrayHelper::getColumn($this->tags, 'title'));
+
+        parent::afterFind();
+    }
+
     private function getImageParams() {
         $imageSize = [];
         if (file_exists(\Yii::getAlias('@app') .'/web'. $this->image)) {
@@ -130,16 +138,6 @@ class CmsArticle extends base\CmsArticle
         }
 
         return $imageSize;
-    }
-
-    public function afterFind()
-    {
-        $this->updateCounters(['hits' => 1]);
-        $this->selectedCategories = \yii\helpers\ArrayHelper::getColumn($this->cmsArticleCategories, 'id');
-        $this->selectedRelatedTags = \yii\helpers\ArrayHelper::getColumn($this->relatedTags, 'title');
-        $this->selectedTags = \yii\helpers\ArrayHelper::getColumn($this->tags, 'title');
-
-        parent::afterFind();
     }
 
     public function getRelatedTags()
