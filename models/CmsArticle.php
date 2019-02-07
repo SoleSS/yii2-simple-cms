@@ -110,7 +110,7 @@ class CmsArticle extends base\CmsArticle
             $this->amp_full_lng1 = AMP::encode($this->full_lng2);
         }
 
-        parent::beforeValidate();
+        return parent::beforeValidate();
     }
 
     public function afterSave($insert, $changedAttributes){
