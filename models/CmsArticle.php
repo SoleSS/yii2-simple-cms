@@ -77,6 +77,16 @@ class CmsArticle extends base\CmsArticle
     public $selectedTags;
     public $selectedRelatedTags;
 
+
+    public function rules()
+    {
+        $rules = parent::rules();
+        $rules[] = ['selectedCategories', 'each', 'rule' => ['integer']];
+        $rules[] = [['selectedTags', 'selectedRelatedTags', ], 'string'];
+
+        return $rules;
+    }
+
     public function attributeLabels()
     {
         $labels = parent::attributeLabels();
@@ -121,7 +131,7 @@ class CmsArticle extends base\CmsArticle
     public function afterFind()
     {
         $this->updateCounters(['hits' => 1]);
-        $this->selectedCategories = \yii\helpers\ArrayHelper::getColumn($this->cmsArticleCategories, 'id');
+        $this->selectedCategories = \yii\helpers\ArrayHelper::getColumn($this->cmsCategories, 'id');
         $this->selectedRelatedTags = implode(',', \yii\helpers\ArrayHelper::getColumn($this->relatedTags, 'title'));
         $this->selectedTags = implode(',', \yii\helpers\ArrayHelper::getColumn($this->tags, 'title'));
 
