@@ -26,7 +26,7 @@ class CmsTag extends base\CmsTag
         }
         $this->updated_at = date('Y-m-d H:i:s');
 
-        parent::beforeValidate();
+        return parent::beforeValidate();
     }
 
 

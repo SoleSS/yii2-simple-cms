@@ -23,7 +23,7 @@ class CmsCategory extends base\CmsCategory
         }
         $this->updated_at = date('Y-m-d H:i:s');
 
-        parent::beforeValidate();
+        return parent::beforeValidate();
     }
 
     public static function asArray() {
