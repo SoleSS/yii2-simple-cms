@@ -41,12 +41,9 @@ use \soless\cms\helpers\AMP;
  * @property string $updated_at Дата обновления
  *
  * @property User $user
- * @property CmsArticleCategory[] $cmsArticleCategories
  * @property CmsCategory[] $cmsCategories
- * @property CmsArticleRelated[] $cmsArticleRelateds
- * @property CmsTag[] $cmsTags
- * @property CmsArticleTag[] $cmsArticleTags
- * @property CmsTag[] $cmsTags0
+ * @property CmsTag[] $relatedTags
+ * @property CmsTag[] $tags
  */
 class CmsArticle extends base\CmsArticle
 {

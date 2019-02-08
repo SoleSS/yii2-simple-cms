@@ -167,6 +167,39 @@ use \yii\helpers\Url;
         ]
     ]) ?>
 
+    <?= $form->field($model, 'gallery')->widget(\unclead\multipleinput\MultipleInput::class, [
+        'max' => 4,
+        'columns' => [
+            [
+                'name' => 'path',
+                'title' => 'Изображение',
+                'type' => InputFile::class,
+                'options' => [
+                    'language'   => 'ru',
+                    'controller' => 'elfinder',
+                    'filter'     => 'image',    // фильтр файлов, можно задать массив фильтров https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#wiki-onlyMimes
+                    'multiple'   => false,
+                    'template' => '<div class="input-group">{input}<span class="input-group-btn">{button}</span></div>',
+
+                    'options' => [
+                        'class' => 'form-control',
+                    ],
+                    'buttonOptions' => ['class' => 'btn btn-default btn-rounded'],
+                    'buttonName' => 'Обзор',
+                ],
+            ],
+            [
+                'name' => 'title',
+                'title' => 'Название',
+            ],
+            [
+                'name' => 'caption',
+                'title' => 'Описание',
+            ],
+        ]
+    ]);
+    ?>
+
     <?= $form->field($model, 'meta_keywords')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'meta_description')->textarea(['rows' => 6]) ?>
