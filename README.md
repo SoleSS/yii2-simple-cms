@@ -15,7 +15,7 @@ add to config:
     ],
 ```
 
-## Available actions:
+## Available CRUD controllers:
 
 cms/cms-article
 
