@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model soless\cms\models\CmsTag */
 
-$this->title = 'Create Cms Tag';
-$this->params['breadcrumbs'][] = ['label' => 'Cms Tags', 'url' => ['index']];
+$this->title = 'Создать новый тег';
+$this->params['breadcrumbs'][] = ['label' => 'Теги', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cms-tag-create">

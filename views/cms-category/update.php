@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model soless\cms\models\CmsCategory */
 
-$this->title = 'Update Cms Category: ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Cms Categories', 'url' => ['index']];
+$this->title = 'Изменить категорию: ' . $model->title;
+$this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Изменить';
 ?>
 <div class="cms-category-update">
 

@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model soless\cms\models\CmsCategory */
 
-$this->title = 'Create Cms Category';
-$this->params['breadcrumbs'][] = ['label' => 'Cms Categories', 'url' => ['index']];
+$this->title = 'Создать новую категорию';
+$this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cms-category-create">

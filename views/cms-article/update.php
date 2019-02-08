@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model soless\cms\models\CmsArticle */
 
-$this->title = 'Update Cms Article: ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Cms Articles', 'url' => ['index']];
+$this->title = 'Изменить материал: ' . $model->title;
+$this->params['breadcrumbs'][] = ['label' => 'Материалы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Изменить';
 ?>
 <div class="cms-article-update">
 

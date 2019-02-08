@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model soless\cms\models\CmsTag */
 
-$this->title = 'Update Cms Tag: ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Cms Tags', 'url' => ['index']];
+$this->title = 'Изменить тег: ' . $model->title;
+$this->params['breadcrumbs'][] = ['label' => 'Теги', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Изменить';
 ?>
 <div class="cms-tag-update">
 
