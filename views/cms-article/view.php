@@ -58,7 +58,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'meta_keywords',
             'meta_description',
             'hits',
-            'medias',
+            [
+                'attribute' => 'medias',
+                'format' => 'html',
+                'value' => '<pre>'. print_r($model->medias, 1) .'</pre>',
+            ],
+            [
+                'attribute' => 'gallery',
+                'format' => 'html',
+                'value' => '<pre>'. print_r($model->gallery, 1) .'</pre>',
+            ],
             'created_at',
             'updated_at',
         ],
