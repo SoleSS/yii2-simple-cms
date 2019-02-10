@@ -77,6 +77,9 @@ class CmsArticleController extends Controller
     {
         $model = new CmsArticle();
 
+        $model->publish_up = date('Y-m-d H:i:s');
+        $model->publish_down = date('Y-m-d H:i:s', strtotime('+10 years'));
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }

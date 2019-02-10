@@ -104,9 +104,11 @@ class CmsArticle extends base\CmsArticle
             $this->created_at = date('Y-m-d H:i:s');
         }
         $this->updated_at = date('Y-m-d H:i:s');
-        $imageSize = $this->getImageParams();
-        $this->image_width = isset($imageSize[0]) ? $imageSize[0] : null;
-        $this->image_height = isset($imageSize[1]) ? $imageSize[1] : null;
+        if (!empty($this->image)) {
+            $imageSize = $this->getImageParams();
+            $this->image_width = isset($imageSize[0]) ? $imageSize[0] : null;
+            $this->image_height = isset($imageSize[1]) ? $imageSize[1] : null;
+        }
         $ampized = AMP::encode($this->full);
         $this->amp_full = $ampized['content'];
         $this->medias = $ampized['medias'];
