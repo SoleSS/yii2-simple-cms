@@ -23,7 +23,11 @@ class AMP {
                     \Yii::error($exception);
                 }
             } else {
-                $imageSize = getimagesize($tmp[1]);
+                try {
+                    $imageSize = getimagesize($tmp[1]);
+                } catch (\Exception $exception) {
+                    \Yii::error($exception);
+                }
             }
 
             $return = str_replace(
