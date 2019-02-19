@@ -1,6 +1,8 @@
 <?php
 namespace soless\cms\helpers;
 
+use \yii\helpers\Url;
+
 class AMP {
     public static function encode($content) {
         $return = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $content);
@@ -14,10 +16,14 @@ class AMP {
             preg_match('/src=[\"\']+([^"]*)[\"\']+/i', $img_tag, $tmp);
 
             $imageSize = [];
-            try {
-                $imageSize = getimagesize(\Yii::getAlias('@app') .'/web'. $tmp[1]);
-            } catch (\Exception $exception) {
-                // TODO: \Yii::error() ?
+            if (Url::isRelative($tmp[1])) {
+                try {
+                    $imageSize = getimagesize(\Yii::getAlias('@app') . '/web' . $tmp[1]);
+                } catch (\Exception $exception) {
+                    \Yii::error($exception);
+                }
+            } else {
+                $imageSize = getimagesize($tmp[1]);
             }
 
             $return = str_replace(
