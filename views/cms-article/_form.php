@@ -168,7 +168,7 @@ use \yii\helpers\Url;
     ]) ?>
 
     <?= $form->field($model, 'gallery')->widget(\unclead\multipleinput\MultipleInput::class, [
-        'max' => 4,
+        //'max' => 4,
         'columns' => [
             [
                 'name' => 'path',
