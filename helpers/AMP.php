@@ -58,6 +58,7 @@ class AMP {
 
                 $autoplay = strpos($iframe_tag, 'autoplay') === false ? false : true;
                 $loop = strpos($iframe_tag, 'loop') === false ? false : true;
+                $controls = strpos($iframe_tag, 'controls') === false ? false : true;
 
                 $iframe_data = ['tag' => $iframe_tag, 'url' => $tmp[1], 'width' => (!empty($width) ? $width[1] : 608), 'height' => (!empty($height) ? $height[1] : 360)];
                 $iframes[] = $iframe_data;
@@ -67,7 +68,12 @@ class AMP {
                 $videoid = $videourl[1];
 
                 $res_ytvideos[] = ['orig' => $iframe_data['tag'], 'videoid' => $videoid, 'height' => $iframe_data['height'], 'width' => $iframe_data['width'], ];
-                $return = str_replace($iframe_data['tag'], '<amp-youtube '. ($autoplay ? 'autoplay ' : '') . ($loop ? 'data-param-loop=1 ' : '') .'data-videoid="'. $videoid .'" height="'. $iframe_data['height'] .'" width="'. $iframe_data['width'] .'" layout="responsive"></amp-youtube>', $return);
+                $return = str_replace($iframe_data['tag'], '<amp-youtube '.
+                    ($autoplay ? 'autoplay ' : '') .
+                    ($loop ? 'data-param-loop=1 data-param-playlist='.$videoid.' ' : 'data-param-loop=0 ') .
+                    ($controls ? 'data-param-controls=1 ' : 'data-param-controls=0 ') .
+                    'data-param-rel=0 data-param-version=3 data-param-showinfo=0 '.
+                    'data-videoid="'. $videoid .'" height="'. $iframe_data['height'] .'" width="'. $iframe_data['width'] .'" layout="responsive"></amp-youtube>', $return);
 
                 $medias[] = [
                     'type' => 'youtube-video',
