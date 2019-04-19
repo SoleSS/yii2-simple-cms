@@ -83,6 +83,7 @@ class AMP {
                     'params' => [
                         'autoplay' => $autoplay,
                         'loop' => $loop,
+                        'controls' => $controls
                     ],
                 ];
             }
