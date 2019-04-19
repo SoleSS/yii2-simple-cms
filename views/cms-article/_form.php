@@ -53,7 +53,7 @@ use \yii\helpers\Url;
             'preset' => 'standard',
             'inline' => false,
             'height' => '300px',
-            'allowedContent' => false,
+            'allowedContent' => true,
         ]),
     ]); ?>
 
@@ -82,7 +82,7 @@ use \yii\helpers\Url;
                             'preset' => 'standard',
                             'inline' => false,
                             'height' => '300px',
-                            'allowedContent' => false,
+                            'allowedContent' => true,
                         ]),
                     ])->label(false); ?>
                 </div>
@@ -118,7 +118,7 @@ use \yii\helpers\Url;
                             'preset' => 'standard',
                             'inline' => false,
                             'height' => '300px',
-                            'allowedContent' => false,
+                            'allowedContent' => true,
                         ]),
                     ])->label(false); ?>
                 </div>
@@ -169,6 +169,7 @@ use \yii\helpers\Url;
 
     <?= $form->field($model, 'gallery')->widget(\unclead\multipleinput\MultipleInput::class, [
         //'max' => 4,
+        'min' => 0,
         'columns' => [
             [
                 'name' => 'path',
