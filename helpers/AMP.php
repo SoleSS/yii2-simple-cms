@@ -55,6 +55,10 @@ class AMP {
                 preg_match('/src=[\"\']+([^"]*)[\"\']+/i', $iframe_tag, $tmp);
                 preg_match('/width=\"(\d+)\"/i', $iframe_tag, $width);
                 preg_match('/height=\"(\d+)\"/i', $iframe_tag, $height);
+
+                $autoplay = strpos($iframe_tag, 'autoplay') === false ? false : true;
+                $loop = strpos($iframe_tag, 'loop') === false ? false : true;
+
                 $iframe_data = ['tag' => $iframe_tag, 'url' => $tmp[1], 'width' => (!empty($width) ? $width[1] : 608), 'height' => (!empty($height) ? $height[1] : 360)];
                 $iframes[] = $iframe_data;
 
@@ -63,13 +67,17 @@ class AMP {
                 $videoid = $videourl[1];
 
                 $res_ytvideos[] = ['orig' => $iframe_data['tag'], 'videoid' => $videoid, 'height' => $iframe_data['height'], 'width' => $iframe_data['width'], ];
-                $return = str_replace($iframe_data['tag'], '<amp-youtube data-videoid="'. $videoid .'" height="'. $iframe_data['height'] .'" width="'. $iframe_data['width'] .'" layout="responsive"></amp-youtube>', $return);
+                $return = str_replace($iframe_data['tag'], '<amp-youtube '. ($autoplay ? 'autoplay ' : '') . ($loop ? 'data-param-loop=1 ' : '') .'data-videoid="'. $videoid .'" height="'. $iframe_data['height'] .'" width="'. $iframe_data['width'] .'" layout="responsive"></amp-youtube>', $return);
 
                 $medias[] = [
                     'type' => 'youtube-video',
                     'id' => $videoid,
                     'width' => (!empty($width) ? $width[1] : 608),
-                    'height' => (!empty($height) ? $height[1] : 360)
+                    'height' => (!empty($height) ? $height[1] : 360),
+                    'params' => [
+                        'autoplay' => $autoplay,
+                        'loop' => $loop,
+                    ],
                 ];
             }
         }
