@@ -109,17 +109,17 @@ class CmsArticle extends base\CmsArticle
             $this->image_width = isset($imageSize[0]) ? $imageSize[0] : null;
             $this->image_height = isset($imageSize[1]) ? $imageSize[1] : null;
         }
-        $ampized = AMP::encode($this->full);
+        $ampized = AMP::encode($this->full, (\Yii::$app->params['frontendFilesRoot'] ?? null));
         $this->amp_full = $ampized['content'];
         $this->medias = $ampized['medias'];
 
         if (!empty($this->full_lng1)) {
-            $ampized = AMP::encode($this->full_lng1);
+            $ampized = AMP::encode($this->full_lng1, (\Yii::$app->params['frontendFilesRoot'] ?? null));
             $this->amp_full_lng1 = $ampized['content'];
         }
 
         if (!empty($this->full_lng2)) {
-            $ampized = AMP::encode($this->full_lng2);
+            $ampized = AMP::encode($this->full_lng2, (\Yii::$app->params['frontendFilesRoot'] ?? null));
             $this->amp_full_lng1 = $ampized['content'];
         }
 

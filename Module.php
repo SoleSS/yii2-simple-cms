@@ -4,8 +4,6 @@ namespace soless\cms;
 
 class Module extends \yii\base\Module
 {
-    public $frontendFilesRoot = '.';
-
     /**
      * @inheritdoc
      */
