@@ -4,7 +4,7 @@ namespace soless\cms\helpers;
 use \yii\helpers\Url;
 
 class AMP {
-    public static function encode($content) {
+    public static function encode($content, $filesRoot = null) {
         $return = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $content);
         $return = preg_replace('/\<span\>(.*)\<\/span\>/i', '$1', $return);
 
@@ -18,7 +18,7 @@ class AMP {
             $imageSize = [];
             if (Url::isRelative($tmp[1])) {
                 try {
-                    $imageSize = getimagesize(\Yii::getAlias('@app') . '/web' . $tmp[1]);
+                    $imageSize = getimagesize($filesRoot . $tmp[1]);
                 } catch (\Exception $exception) {
                     \Yii::error($exception);
                 }
