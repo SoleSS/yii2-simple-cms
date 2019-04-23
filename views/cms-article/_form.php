@@ -208,6 +208,7 @@ use \yii\helpers\Url;
             <?= $form->field($model, 'params[iframe]')->checkbox([], false)->label('IFrame'); ?>
             <?= $form->field($model, 'params[accordion]')->checkbox([], false)->label('AMP Аккордион'); ?>
             <?= $form->field($model, 'params[carousel]')->checkbox([], false)->label('AMP Карусель'); ?>
+            <?= $form->field($model, 'params[bind]')->checkbox([], false)->label('AMP Bind'); ?>
         </div>
     </div>
 
