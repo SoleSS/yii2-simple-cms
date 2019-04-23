@@ -201,10 +201,17 @@ use \yii\helpers\Url;
     ]);
     ?>
 
-    <?= $form->field($model, 'params[ytvideo]')->checkbox([], false)->label('YouTube видео'); ?>
-    <?= $form->field($model, 'params[iframe]')->checkbox([], false)->label('IFrame'); ?>
-    <?= $form->field($model, 'params[accordion]')->checkbox([], false)->label('AMP Аккордион'); ?>
-    <?= $form->field($model, 'params[carousel]')->checkbox([], false)->label('AMP Карусель'); ?>
+    <div class="panel panel-default">
+        <div class="panel-heading">Дополнительные параметры</div>
+        <div class="panel-body">
+            <?= $form->field($model, 'params[ytvideo]')->checkbox([], false)->label('YouTube видео'); ?>
+            <?= $form->field($model, 'params[iframe]')->checkbox([], false)->label('IFrame'); ?>
+            <?= $form->field($model, 'params[accordion]')->checkbox([], false)->label('AMP Аккордион'); ?>
+            <?= $form->field($model, 'params[carousel]')->checkbox([], false)->label('AMP Карусель'); ?>
+        </div>
+    </div>
+
+
 
     <?= $form->field($model, 'meta_keywords')->textInput(['maxlength' => true]) ?>
 
