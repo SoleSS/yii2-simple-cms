@@ -201,6 +201,10 @@ use \yii\helpers\Url;
     ]);
     ?>
 
+    <?= $form->field($model, 'params["ytvideo"]')->checkbox([])->label('YouTube видео'); ?>
+    <?= $form->field($model, 'params["iframe"]')->checkbox([])->label('IFrame'); ?>
+    <?= $form->field($model, 'params["accordion"]')->checkbox([])->label('AMP Аккордион'); ?>
+
     <?= $form->field($model, 'meta_keywords')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'meta_description')->textarea(['rows' => 6]) ?>

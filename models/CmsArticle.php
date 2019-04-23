@@ -39,6 +39,7 @@ use \soless\cms\helpers\AMP;
  * @property array $gallery Галерея
  * @property string $created_at Дата создания
  * @property string $updated_at Дата обновления
+ * @property array $params Дополнительные параметры материала
  *
  * @property User $user
  * @property CmsCategory[] $cmsCategories
