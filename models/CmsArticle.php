@@ -147,8 +147,8 @@ class CmsArticle extends base\CmsArticle
 
     private function getImageParams() {
         $imageSize = [];
-        if (file_exists(\Yii::getAlias('@app') .'/web'. $this->image)) {
-            $imageSize = getimagesize(\Yii::getAlias('@app') .'/web'. $this->image);
+        if (file_exists((\Yii::$app->params['frontendFilesRoot'] ?? '') . $this->image)) {
+            $imageSize = getimagesize((\Yii::$app->params['frontendFilesRoot'] ?? '') . $this->image);
         }
 
         return $imageSize;
