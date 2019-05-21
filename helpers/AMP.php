@@ -15,6 +15,8 @@ class AMP {
             $tmp = [];
             preg_match('/src=[\"\']+([^"]*)[\"\']+/i', $img_tag, $tmp);
 
+            if (!isset($tmp[1])) continue;
+
             $imageSize = [];
             if (Url::isRelative($tmp[1])) {
                 try {
