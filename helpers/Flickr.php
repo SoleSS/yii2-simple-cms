@@ -61,8 +61,11 @@ class Flickr {
             ->send();
 
         if ($response->isOk) {
+            $i = 0;
             foreach ($response->data['sizes']['size'] as $size) {
                 $result[$size['label']] = $size;
+                $result[$size['label']]['index'] = $i;
+                $i++;
             }
         }
 
