@@ -220,7 +220,7 @@ class CmsArticle extends base\CmsArticle
         $cache = \Yii::$app->cache;
         $cacheKey = 'cmsArticle'. $this->id .'FlickrPhotos';
         $result = $cache->get($cacheKey);
-        if ($result === false) {
+        if (empty($result)) { // if ($result === false) {
             $result = [];
             $pool = Pool::create(100);
             $logger = \Yii::getLogger();
