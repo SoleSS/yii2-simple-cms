@@ -24,6 +24,7 @@ class Flickr {
                 'method' => 'flickr.photosets.getPhotos',
                 'api_key' => \Yii::$app->params['flickr']['apiKey'],
                 'photoset_id' => $id,
+                'media' => 'photos',
                 'format' => 'json',
                 'nojsoncallback' => '?',
             ])
