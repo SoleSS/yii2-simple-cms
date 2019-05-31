@@ -60,7 +60,9 @@ class Flickr {
             ->send();
 
         if ($response->isOk) {
-            $result = $response->data['sizes']['size'];
+            foreach ($response->data['sizes']['size'] as $size) {
+                $result[$size['label']] = $size;
+            }
         }
 
         return $result;
