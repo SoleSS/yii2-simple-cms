@@ -4,6 +4,7 @@ namespace soless\cms\models;
 
 use \soless\cms\helpers\AMP;
 use \soless\cms\helpers\Flickr;
+use \Spatie\Async\Pool;
 
 /**
  * This is the model class for table "cms_article".
@@ -178,8 +179,11 @@ class CmsArticle extends base\CmsArticle
     }
 
 
-
-    public function getFlickrAlbumImages() {
+    /**
+     * @return array|bool
+     * @deprecated
+     */
+    public function getFlickrAlbumImagesOld() {
         if (!isset(\Yii::$app->params['flickr']) ||
             empty($this->params['flickrAlbumId']) ||
             empty(\Yii::$app->params['flickr']['enabled']) ||
@@ -198,6 +202,39 @@ class CmsArticle extends base\CmsArticle
             }
 
             $cache->set($cacheKey, $result, 600);
+        }
+
+
+        return $result;
+    }
+
+    public function getFlickrAlbumImages() {
+        if (!isset(\Yii::$app->params['flickr']) ||
+            empty($this->params['flickrAlbumId']) ||
+            empty(\Yii::$app->params['flickr']['enabled']) ||
+            empty(\Yii::$app->params['flickr']['apiKey']) ||
+            empty($this->params['flickrAlbumId']) ||
+            empty(\Yii::$app->params['flickr']['endpoint']))
+            return [];
+
+        $cache = \Yii::$app->cache;
+        $cacheKey = 'cmsArticle'. $this->id .'FlickrPhotos';
+        $result = $cache->get($cacheKey);
+        if ($result === false) {
+            $result = [];
+            $pool = Pool::create(100);
+            $logger = \Yii::getLogger();
+            foreach (Flickr::albumPhotos($this->params['flickrAlbumId']) as $photo) {
+                $pool->add(function() use ($photo) {
+                    return \soless\cms\helpers\Flickr::photo($photo['id']);
+                })->then(function($output) use (&$result) {
+                    $result[] = $output;
+                })->catch(function (\Throwable $exception) use (&$logger) {
+                    $logger->log($exception, 1);
+                });
+            }
+
+            $cache->set($cacheKey, $result, 3600);
         }
 
 

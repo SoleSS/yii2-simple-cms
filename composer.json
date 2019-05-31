@@ -25,7 +25,8 @@
     "mihaildev/yii2-elfinder": "*",
     "unclead/yii2-multiple-input": "~2.0",
     "soless/yii2-tag-editor": "*",
-    "yiisoft/yii2-httpclient": "~2.0.0"
+    "yiisoft/yii2-httpclient": "~2.0.0",
+    "spatie/async": "^1.0"
   },
 
   "autoload": {
