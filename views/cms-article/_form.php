@@ -209,6 +209,9 @@ use \yii\helpers\Url;
             <?= $form->field($model, 'params[accordion]')->checkbox([], false)->label('AMP Аккордион'); ?>
             <?= $form->field($model, 'params[carousel]')->checkbox([], false)->label('AMP Карусель'); ?>
             <?= $form->field($model, 'params[bind]')->checkbox([], false)->label('AMP Bind'); ?>
+            <?php if (isset(\Yii::$app->params['flickr'])) : ?>
+                <?= $form->field($model, 'params[flickrAlbumId]')->textInput(['maxlength' => true])->label('Id альбома Flickr') ?>
+            <?php endif; ?>
         </div>
     </div>
 

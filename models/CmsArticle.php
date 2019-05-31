@@ -3,6 +3,8 @@
 namespace soless\cms\models;
 
 use \soless\cms\helpers\AMP;
+use \soless\cms\helpers\Flickr;
+
 /**
  * This is the model class for table "cms_article".
  *
@@ -174,6 +176,36 @@ class CmsArticle extends base\CmsArticle
     public function getTypeName() {
         return static::TYPE_NAME[$this->type_id];
     }
+
+
+
+    public function getFlickrAlbumImages() {
+        if (!isset(\Yii::$app->params['flickr']) ||
+            empty($this->params['flickrAlbumId']) ||
+            empty(\Yii::$app->params['flickr']['enabled']) ||
+            empty(\Yii::$app->params['flickr']['apiKey']) ||
+            empty($this->params['flickrAlbumId']) ||
+            empty(\Yii::$app->params['flickr']['endpoint']))
+                return [];
+
+        $cache = \Yii::$app->cache;
+        $cacheKey = 'cmsArticle'. $this->id .'FlickrPhotos';
+        $result = $cache->get($cacheKey);
+        if ($result === false) {
+            $result = [];
+            foreach (Flickr::albumPhotos($this->params['flickrAlbumId']) as $photo) {
+                $result[] = Flickr::photo($photo['id']);
+            }
+
+            $cache->set($cacheKey, $result, 600);
+        }
+
+
+        return $result;
+    }
+
+
+
 
     private function setCategories() {
         $this->unlinkAll('cmsCategories', true);
