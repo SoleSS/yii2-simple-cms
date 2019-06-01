@@ -64,8 +64,9 @@ class Flickr {
         $result = [];
         foreach ($decoded['sizes']['size'] as $size) {
             $result[$size['label']] = $size;
-            $result[$size['label']]['index'] = $id;
         }
+
+        $result['id'] = $id;
 
         return $result;
     }
