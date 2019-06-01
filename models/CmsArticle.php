@@ -230,7 +230,7 @@ class CmsArticle extends base\CmsArticle
                 })->then(function($output) use (&$result) {
                     $result[] = $output;
                 })->catch(function (\Throwable $exception) use (&$logger) {
-                    $logger->log($exception, 1);
+                    $logger->log($exception->getMessage(), 1);
                 });
             }
 

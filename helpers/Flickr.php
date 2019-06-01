@@ -59,11 +59,11 @@ class Flickr {
         }
         curl_close($curl);
 
-        $decoded = json_decode($curl_response);
+        $decoded = json_decode($curl_response, true);
 
         $i = 0;
         $result = [];
-        foreach ($decoded->response['sizes']['size'] as $size) {
+        foreach ($decoded['sizes']['size'] as $size) {
             $result[$size['label']] = $size;
             $result[$size['label']]['index'] = $i;
             $i++;
