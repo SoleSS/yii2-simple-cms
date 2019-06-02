@@ -258,7 +258,6 @@ class CmsArticle extends base\CmsArticle
         $cacheKey = 'cmsArticle'. $this->id .'FlickrPhotos';
         $result = $cache->get($cacheKey);
         if (empty($result)) { // if ($result === false) {
-            $result = [];
             $mh = curl_multi_init();
             $requests = [];
             $i = 0;
@@ -281,8 +280,12 @@ class CmsArticle extends base\CmsArticle
             }
             curl_multi_close($mh);
 
-            foreach ($requests as $request) {
-                $result[] = curl_multi_getcontent($request);
+            $result = [];
+            foreach ($requests as $id => $request) {
+                foreach (json_decode(curl_multi_getcontent($request), true)['sizes']['size'] as $size) {
+                    $result[$id][$size['label']] = $size;
+                }
+                $result[$id] = $id;
             }
 
             $cache->set($cacheKey, $result, 3600);
