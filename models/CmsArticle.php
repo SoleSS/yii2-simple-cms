@@ -285,7 +285,7 @@ class CmsArticle extends base\CmsArticle
                 foreach (json_decode(curl_multi_getcontent($request), true)['sizes']['size'] as $size) {
                     $result[$id][$size['label']] = $size;
                 }
-                $result[$id] = $id;
+                $result[$id]['index'] = $id;
             }
 
             $cache->set($cacheKey, $result, 3600);
