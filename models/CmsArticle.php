@@ -208,7 +208,11 @@ class CmsArticle extends base\CmsArticle
         return $result;
     }
 
-    public function getFlickrAlbumImages() {
+    /**
+     * @return array
+     * @deprecated
+     */
+    public function getFlickrAlbumImagesInPool() {
         if (!isset(\Yii::$app->params['flickr']) ||
             empty($this->params['flickrAlbumId']) ||
             empty(\Yii::$app->params['flickr']['enabled']) ||
@@ -229,7 +233,7 @@ class CmsArticle extends base\CmsArticle
                     return \soless\cms\helpers\Flickr::photo($photo['id']);
                 })->then(function($output) use (&$result) {
                     $result[] = $output;
-                })->catch(function (\Throwable $exception) use (&$logger) {
+                })->catch(function (\Exception $exception) use (&$logger) {
                     $logger->log($exception->getMessage(), 1);
                 });
             }
@@ -241,6 +245,52 @@ class CmsArticle extends base\CmsArticle
         return $result;
     }
 
+    public function getFlickrAlbumImages() {
+        if (!isset(\Yii::$app->params['flickr']) ||
+            empty($this->params['flickrAlbumId']) ||
+            empty(\Yii::$app->params['flickr']['enabled']) ||
+            empty(\Yii::$app->params['flickr']['apiKey']) ||
+            empty($this->params['flickrAlbumId']) ||
+            empty(\Yii::$app->params['flickr']['endpoint']))
+            return [];
+
+        $cache = \Yii::$app->cache;
+        $cacheKey = 'cmsArticle'. $this->id .'FlickrPhotos';
+        $result = $cache->get($cacheKey);
+        if (empty($result)) { // if ($result === false) {
+            $result = [];
+            $mh = curl_multi_init();
+            $requests = [];
+            $i = 0;
+            foreach (Flickr::albumPhotos(
+                $this->params['flickrAlbumId'],
+                \Yii::$app->params['flickr']['apiKey'],
+                \Yii::$app->params['flickr']['endpoint'] . '/rest') as $photo) {
+                    $requests[$i] = Flickr::curlPhotoRequest($photo['id'], \Yii::$app->params['flickr']['apiKey'], \Yii::$app->params['flickr']['endpoint'] . '/rest');
+                    curl_multi_add_handle($mh, $requests[$i]);
+                    $i++;
+            }
+
+            $running = null;
+            do {
+                curl_multi_exec($mh, $running);
+            } while ($running);
+
+            foreach ($requests as $request) {
+                curl_multi_remove_handle($mh, $request);
+            }
+            curl_multi_close($mh);
+
+            foreach ($requests as $request) {
+                $result[] = curl_multi_getcontent($request);
+            }
+
+            $cache->set($cacheKey, $result, 3600);
+        }
+
+
+        return $result;
+    }
 
 
 
