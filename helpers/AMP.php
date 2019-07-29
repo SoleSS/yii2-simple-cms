@@ -14,6 +14,8 @@ class AMP {
         foreach( $raw_imgs[0] as $img_tag ) {
             $tmp = [];
             preg_match('/src=[\"\']+([^"]*)[\"\']+/i', $img_tag, $tmp);
+            preg_match('/class=[\"\']+([^"]*)[\"\']+/i', $img_tag, $classes);
+            $class = !empty($classes) ? 'class="'. $classes[1] .'" ' : '';
 
             if (!isset($tmp[1])) continue;
 
@@ -34,7 +36,7 @@ class AMP {
 
             $return = str_replace(
                 $img_tag,
-                '<amp-img src="'. $tmp[1] .'" height="'. (isset($imageSize[1]) ? $imageSize[1] : 0) .'" width="'. (isset($imageSize[0]) ? $imageSize[0] : 0) .'" layout="responsive"></amp-img>',
+                '<amp-img '. $class .'src="'. $tmp[1] .'" height="'. (isset($imageSize[1]) ? $imageSize[1] : 0) .'" width="'. (isset($imageSize[0]) ? $imageSize[0] : 0) .'" layout="responsive"></amp-img>',
                 $return
             );
 
