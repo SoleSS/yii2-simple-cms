@@ -51,6 +51,9 @@ use \Spatie\Async\Pool;
  */
 class CmsArticle extends base\CmsArticle
 {
+
+    public $batchGallery = '';
+
     const TYPE_WEBPAGE              = 1;
     const TYPE_NEWS                 = 2;
     const TYPE_ARTICLE              = 3;
@@ -151,6 +154,29 @@ class CmsArticle extends base\CmsArticle
                         $result[] = $newData;
                     } catch (\Exception $exception) {
                         \Yii::error($exception);
+                    }
+                }
+
+                $this->gallery = $result;
+            }
+
+            if (!empty($this->batchGallery)) {
+                $result = !empty($this->gallery) ? $this->gallery : [];
+
+                foreach (explode(',', $this->batchGallery) as $imagePath) {
+                    if (file_exists((\Yii::$app->params['frontendFilesRoot'] ?? '') . $imagePath)) {
+                        try {
+                            $imageSize = getimagesize((\Yii::$app->params['frontendFilesRoot'] ?? '') . $imagePath);
+                            $result[] = [
+                                'path' => $imagePath,
+                                'title' => '',
+                                'caption' => '',
+                                'image_width' => isset($imageSize[0]) ? $imageSize[0] : null,
+                                'image_height' => isset($imageSize[1]) ? $imageSize[1] : null,
+                            ];
+                        } catch (\Exception $exception) {
+                            \Yii::error($exception);
+                        }
                     }
                 }
 
