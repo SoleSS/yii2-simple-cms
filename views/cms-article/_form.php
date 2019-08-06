@@ -167,6 +167,17 @@ use \yii\helpers\Url;
         ]
     ]) ?>
 
+    <?php echo $form->field($model, 'batchGallery')->widget(InputFile::className(), [
+        'language'      => 'ru',
+        'controller'    => 'elfinder', // вставляем название контроллера, по умолчанию равен elfinder
+        'filter'        => 'image',    // фильтр файлов, можно задать массив фильтров https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#wiki-onlyMimes
+        'template'      => '<div class="input-group">{input}<span class="input-group-btn">{button}</span></div>',
+        'options'       => ['class' => 'form-control'],
+        'buttonOptions' => ['class' => 'btn btn-default btn-rounded'],
+        'buttonName' => 'Обзор',
+        'multiple'      => true        // возможность выбора нескольких файлов
+    ]); ?>
+
     <?= $form->field($model, 'gallery')->widget(\unclead\multipleinput\MultipleInput::class, [
         //'max' => 4,
         'min' => 0,
