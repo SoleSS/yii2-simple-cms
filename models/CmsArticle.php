@@ -133,6 +133,32 @@ class CmsArticle extends base\CmsArticle
         return parent::beforeValidate();
     }
 
+    public function beforeSave($insert) {
+        if (parent::beforeSave($insert)) {
+            if (!empty($this->gallery)) {
+                $result = [];
+                foreach ($this->gallery as $photo) {
+                    $imageSize = [];
+                    if (file_exists((\Yii::$app->params['frontendFilesRoot'] ?? '') . $photo['path'])) {
+                        $imageSize = getimagesize((\Yii::$app->params['frontendFilesRoot'] ?? '') . $photo['path']);
+                    }
+
+                    $newData = $photo;
+                    $newData['image_width'] = isset($imageSize[0]) ? $imageSize[0] : null;
+                    $newData['image_height'] = isset($imageSize[1]) ? $imageSize[1] : null;
+
+                    $result[] = $newData;
+                }
+
+                $this->gallery = $result;
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function afterSave($insert, $changedAttributes){
         parent::afterSave($insert, $changedAttributes);
 
