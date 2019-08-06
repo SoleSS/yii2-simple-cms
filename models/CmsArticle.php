@@ -89,7 +89,7 @@ class CmsArticle extends base\CmsArticle
     {
         $rules = parent::rules();
         $rules[] = ['selectedCategories', 'each', 'rule' => ['integer']];
-        $rules[] = [['selectedTags', 'selectedRelatedTags', ], 'string'];
+        $rules[] = [['selectedTags', 'selectedRelatedTags', 'batchGallery', ], 'string'];
 
         return $rules;
     }
@@ -163,7 +163,7 @@ class CmsArticle extends base\CmsArticle
             if (!empty($this->batchGallery)) {
                 $result = !empty($this->gallery) ? $this->gallery : [];
 
-                foreach (explode(',', $this->batchGallery) as $imagePath) {
+                foreach (explode(', ', $this->batchGallery) as $imagePath) {
                     if (file_exists((\Yii::$app->params['frontendFilesRoot'] ?? '') . $imagePath)) {
                         try {
                             $imageSize = getimagesize((\Yii::$app->params['frontendFilesRoot'] ?? '') . $imagePath);
