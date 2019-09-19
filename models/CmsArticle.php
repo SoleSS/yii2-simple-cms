@@ -43,6 +43,7 @@ use \Spatie\Async\Pool;
  * @property string $created_at Дата создания
  * @property string $updated_at Дата обновления
  * @property array $params Дополнительные параметры материала
+ * @property int $priority Приоритет материала
  *
  * @property User $user
  * @property CmsCategory[] $cmsCategories
@@ -84,7 +85,6 @@ class CmsArticle extends base\CmsArticle
     public $selectedTags;
     public $selectedRelatedTags;
 
-
     public function rules()
     {
         $rules = parent::rules();
@@ -112,6 +112,8 @@ class CmsArticle extends base\CmsArticle
             $this->created_at = date('Y-m-d H:i:s');
         }
         $this->updated_at = date('Y-m-d H:i:s');
+        $this->priority = $this->priority ?? 500;
+
         if (!empty($this->image)) {
             $imageSize = $this->getImageParams();
             $this->image_width = isset($imageSize[0]) ? $imageSize[0] : null;

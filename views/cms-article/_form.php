@@ -25,6 +25,8 @@ use \yii\helpers\Url;
 
     <?= $form->field($model, 'subtitle')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'priority')->textInput(['placeholder' => 500]) ?>
+
     <?php echo $form->field($model, 'image')->widget(InputFile::className(), [
         'language'      => 'ru',
         'controller'    => 'elfinder', // вставляем название контроллера, по умолчанию равен elfinder

@@ -41,6 +41,7 @@ use Yii;
  * @property string $created_at Дата создания
  * @property string $updated_at Дата обновления
  * @property array $params Дополнительные параметры материала
+ * @property int $priority Приоритет материала
  *
  * @property User $user
  * @property CmsArticleCategory[] $cmsArticleCategories
@@ -66,8 +67,8 @@ class CmsArticle extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'intro', 'full', 'publish_up', 'publish_down', 'created_at', 'updated_at'], 'required'],
-            [['type_id', 'image_width', 'image_height', 'show_image', 'published', 'user_id', 'hits'], 'integer'],
+            [['title', 'intro', 'full', 'publish_up', 'publish_down', 'created_at', 'updated_at', 'priority'], 'required'],
+            [['type_id', 'image_width', 'image_height', 'show_image', 'published', 'user_id', 'hits', 'priority'], 'integer'],
             [['full', 'full_lng1', 'full_lng2', 'amp_full', 'amp_full_lng1', 'amp_full_lng2'], 'string'],
             [['publish_up', 'publish_down', 'medias', 'gallery', 'created_at', 'updated_at', 'params'], 'safe'],
             [['title', 'title_lng1', 'title_lng2', 'subtitle', 'subtitle_lng1', 'subtitle_lng2', 'user_alias'], 'string', 'max' => 255],
@@ -118,6 +119,7 @@ class CmsArticle extends \yii\db\ActiveRecord
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
             'params' => 'Дополнительные параметры материала',
+            'priority' => 'Приоритет материала',
         ];
     }
 
