@@ -109,7 +109,7 @@ class CmsArticle extends base\CmsArticle
     {
         if ($this->isNewRecord) {
             $this->user_id = \Yii::$app->user->id;
-            $this->created_at = date('Y-m-d H:i:s');
+            $this->created_at = $this->created_at ?? date('Y-m-d H:i:s');
         }
         $this->updated_at = date('Y-m-d H:i:s');
         $this->priority = $this->priority ?? 500;

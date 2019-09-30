@@ -134,6 +134,13 @@ use \yii\helpers\Url;
         1 => 'Опубликовано',
     ]) ?>
 
+    <?= $form->field($model, 'created_at')->widget(DateTimePicker::classname(), [
+        'options' => ['placeholder' => 'Дата создания материала'],
+        'pluginOptions' => [
+            'autoclose' => true
+        ]
+    ]); ?>
+
     <?= $form->field($model, 'publish_up')->widget(DateTimePicker::classname(), [
         'options' => ['placeholder' => 'Начало публикации ...'],
         'pluginOptions' => [
