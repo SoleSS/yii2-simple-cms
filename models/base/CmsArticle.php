@@ -42,6 +42,7 @@ use Yii;
  * @property string $updated_at Дата обновления
  * @property array $params Дополнительные параметры материала
  * @property int $priority Приоритет материала
+ * @property array $rights Права доступа
  *
  * @property User $user
  * @property CmsArticleCategory[] $cmsArticleCategories

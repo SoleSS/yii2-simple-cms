@@ -12,6 +12,7 @@ use Yii;
  * @property string $description Описание категории
  * @property string $created_at Дата создания
  * @property string $updated_at Дата обновления
+ * @property array $rights Права доступа
  *
  * @property CmsArticleCategory[] $cmsArticleCategories
  * @property CmsArticle[] $cmsArticles

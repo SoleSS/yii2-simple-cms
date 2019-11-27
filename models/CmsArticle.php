@@ -2,6 +2,7 @@
 
 namespace soless\cms\models;
 
+use Yii;
 use \soless\cms\helpers\AMP;
 use \soless\cms\helpers\Flickr;
 use \Spatie\Async\Pool;
@@ -44,6 +45,7 @@ use \Spatie\Async\Pool;
  * @property string $updated_at Дата обновления
  * @property array $params Дополнительные параметры материала
  * @property int $priority Приоритет материала
+ * @property array $rights Права доступа
  *
  * @property User $user
  * @property CmsCategory[] $cmsCategories
@@ -139,8 +141,40 @@ class CmsArticle extends base\CmsArticle
         return parent::beforeValidate();
     }
 
+    public function isUserAccessable() {
+        if (!in_array('all', $this->rights->allowedUsers) && Yii::$app->user->isGuest) return false;
+
+        if (in_array(Yii::$app->user->id, $this->rights->deniedUsers)) {
+            return false;
+        }
+        foreach ($this->rights->deniedGroups as $group) {
+            if (Yii::$app->user->can($group)) {
+                return false;
+            }
+        }
+
+        if (in_array('all', $this->rights->allowedUsers) || in_array(Yii::$app->user->id, $this->rights->allowedUsers)) {
+            return true;
+        }
+        if (in_array('all', $this->rights->allowedGroups)) return true;
+        foreach ($this->rights->allowedGroups as $group) {
+            if (Yii::$app->user->can($group)) {
+                return true;
+            }
+        }
+    }
+
     public function beforeSave($insert) {
         if (parent::beforeSave($insert)) {
+            if (empty($this->rights)) {
+                $rights = [
+                    'allowedGroups' => ['all', ],
+                    'allowedUsers' => ['all', ],
+                    'deniedGroups' => [],
+                    'deniedUsers' => [],
+                ];
+                $this->rights = $rights;
+            }
             if (!empty($this->gallery)) {
                 $result = [];
                 foreach ($this->gallery as $photo) {

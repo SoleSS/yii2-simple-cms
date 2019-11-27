@@ -235,6 +235,15 @@ use \yii\helpers\Url;
         </div>
     </div>
 
+    <?php if (isset(\Yii::$app->params['cmsRights'])) : ?>
+        <div class="panel panel-default">
+            <div class="panel-heading">Параметры доступа</div>
+            <div class="panel-body">
+                <?= $form->field($model, 'rights[allowedGroups]')->checkboxList(\soless\cms\models\RbacGroup::asArray()); ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
 
 
     <?= $form->field($model, 'meta_keywords')->textInput(['maxlength' => true]) ?>
