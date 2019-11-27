@@ -13,6 +13,7 @@ use Yii;
  * @property string $created_at Дата создания
  * @property string $updated_at Дата обновления
  * @property array $rights Права доступа
+ * @property array $allowed_access_roles Группы имеющие право на доступ
  *
  * @property CmsArticleCategory[] $cmsArticleCategories
  * @property CmsArticle[] $cmsArticles
@@ -51,6 +52,8 @@ class CmsCategory extends \yii\db\ActiveRecord
             'description' => 'Описание категории',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
+            'rights' => 'Права доступа',
+            'allowed_access_roles' => 'Группы имеющие право на доступ',
         ];
     }
 

@@ -239,7 +239,7 @@ use \yii\helpers\Url;
         <div class="panel panel-default">
             <div class="panel-heading">Параметры доступа</div>
             <div class="panel-body">
-                <?= $form->field($model, 'rights[allowedGroups]')->checkboxList(\soless\cms\models\RbacGroup::asArray()); ?>
+                <?= $form->field($model, 'allowed_access_roles')->checkboxList(\soless\cms\models\RbacGroup::asArray()); ?>
             </div>
         </div>
     <?php endif; ?>

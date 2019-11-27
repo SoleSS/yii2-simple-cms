@@ -8,8 +8,13 @@ class RbacGroup extends \yii\db\ActiveRecord {
     }
 
     public static function asArray() {
-        return static::find()
+        $result = [];
+        foreach (array_merge(static::find()
             ->select('name')
-            ->column();
+            ->column(), 'all') as $item) {
+                $result[$item] = $item;
+        }
+
+        return $result;
     }
 }

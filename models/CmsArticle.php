@@ -46,6 +46,7 @@ use \Spatie\Async\Pool;
  * @property array $params Дополнительные параметры материала
  * @property int $priority Приоритет материала
  * @property array $rights Права доступа
+ * @property array $allowed_access_roles Группы имеющие право на доступ
  *
  * @property User $user
  * @property CmsCategory[] $cmsCategories
