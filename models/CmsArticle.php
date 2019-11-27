@@ -142,7 +142,7 @@ class CmsArticle extends base\CmsArticle
         return parent::beforeValidate();
     }
 
-    public function isUserAccessable() {
+    /*public function isUserAccessable() {
         if (!in_array('all', $this->rights->allowedUsers) && Yii::$app->user->isGuest) return false;
 
         if (in_array(Yii::$app->user->id, $this->rights->deniedUsers)) {
@@ -159,6 +159,16 @@ class CmsArticle extends base\CmsArticle
         }
         if (in_array('all', $this->rights->allowedGroups)) return true;
         foreach ($this->rights->allowedGroups as $group) {
+            if (Yii::$app->user->can($group)) {
+                return true;
+            }
+        }
+    }*/
+
+    public function isUserAccessable() {
+        if (!in_array('all', $this->allowed_access_roles) && Yii::$app->user->isGuest) return false;
+        if (in_array('all', $this->allowed_access_roles)) return true;
+        foreach ($this->allowed_access_roles as $group) {
             if (Yii::$app->user->can($group)) {
                 return true;
             }
