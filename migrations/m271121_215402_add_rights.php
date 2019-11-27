@@ -1,7 +1,7 @@
 <?php
 use yii\db\Migration;
 
-class m191121_223302_add_rights extends Migration
+class m271121_215402_add_rights extends Migration
 {
     /**
      * {@inheritdoc}
