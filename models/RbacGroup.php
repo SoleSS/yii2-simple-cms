@@ -11,7 +11,7 @@ class RbacGroup extends \yii\db\ActiveRecord {
         $result = [];
         foreach (array_merge(static::find()
             ->select('name')
-            ->column(), 'all') as $item) {
+            ->column(), ['all']) as $item) {
                 $result[$item] = $item;
         }
 
