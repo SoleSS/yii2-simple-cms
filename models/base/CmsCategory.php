@@ -38,6 +38,7 @@ class CmsCategory extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['title'], 'string', 'max' => 255],
+            ['allowed_access_roles', 'each', 'rule' => ['string']],
         ];
     }
 

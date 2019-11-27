@@ -47,6 +47,8 @@ use \Spatie\Async\Pool;
  * @property int $priority Приоритет материала
  * @property array $rights Права доступа
  * @property array $allowed_access_roles Группы имеющие право на доступ
+ * @property string $batchGallery Список файлов галереи
+  * @property boolean $isNewRecord Признак новой записи
  *
  * @property User $user
  * @property CmsCategory[] $cmsCategories
@@ -93,6 +95,7 @@ class CmsArticle extends base\CmsArticle
         $rules = parent::rules();
         $rules[] = ['selectedCategories', 'each', 'rule' => ['integer']];
         $rules[] = [['selectedTags', 'selectedRelatedTags', 'batchGallery', ], 'string'];
+        $rules[] = ['allowed_access_roles', 'each', 'rule' => ['string']];
 
         return $rules;
     }
@@ -104,6 +107,7 @@ class CmsArticle extends base\CmsArticle
         $labels['selectedTags'] = 'Теги';
         $labels['selectedRelatedTags'] = 'Теги для связывания материалов';
         $labels['batchGallery'] = 'Массовое добавление фото';
+        $labels['allowed_access_roles'] = 'Группы имеющие право на доступ';
 
         return $labels;
     }
@@ -177,7 +181,7 @@ class CmsArticle extends base\CmsArticle
 
     public function beforeSave($insert) {
         if (parent::beforeSave($insert)) {
-            if (empty($this->rights)) {
+            /*if (empty($this->rights)) {
                 $rights = [
                     'allowedGroups' => ['all', ],
                     'allowedUsers' => ['all', ],
@@ -185,7 +189,7 @@ class CmsArticle extends base\CmsArticle
                     'deniedUsers' => [],
                 ];
                 $this->rights = $rights;
-            }
+            }*/
             if (!empty($this->gallery)) {
                 $result = [];
                 foreach ($this->gallery as $photo) {

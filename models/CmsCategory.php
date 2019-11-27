@@ -18,6 +18,22 @@ namespace soless\cms\models;
  */
 class CmsCategory extends base\CmsCategory
 {
+    public function rules()
+    {
+        $rules = parent::rules();
+        $rules[] = ['allowed_access_roles', 'each', 'rule' => ['string']];
+
+        return $rules;
+    }
+
+    public function attributeLabels()
+    {
+        $labels = parent::attributeLabels();
+        $labels['allowed_access_roles'] = 'Группы имеющие право на доступ';
+
+        return $labels;
+    }
+
     public function beforeValidate()
     {
         if ($this->isNewRecord) {
@@ -63,7 +79,7 @@ class CmsCategory extends base\CmsCategory
 
     public function beforeSave($insert) {
         if (parent::beforeSave($insert)) {
-            if (empty($this->rights)) {
+            /*if (empty($this->rights)) {
                 $rights = [
                     'allowedGroups' => ['all',],
                     'allowedUsers' => ['all',],
@@ -71,7 +87,7 @@ class CmsCategory extends base\CmsCategory
                     'deniedUsers' => [],
                 ];
                 $this->rights = $rights;
-            }
+            }*/
 
             return true;
         } else {

@@ -78,6 +78,7 @@ class CmsArticleController extends Controller
         $model = new CmsArticle();
 
         $model->priority = 500;
+        $model->allowed_access_roles = ['all'];
         $model->created_at = date('Y-m-d H:i:s');
         $model->publish_up = date('Y-m-d H:i:s');
         $model->publish_down = date('Y-m-d H:i:s', strtotime('+10 years'));

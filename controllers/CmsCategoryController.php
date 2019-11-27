@@ -77,6 +77,9 @@ class CmsCategoryController extends Controller
     {
         $model = new CmsCategory();
 
+        $model->allowed_access_roles = ['all'];
+        $model->created_at = date('Y-m-d H:i:s');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }

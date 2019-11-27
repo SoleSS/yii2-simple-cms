@@ -76,6 +76,7 @@ class CmsArticle extends \yii\db\ActiveRecord
             [['title', 'title_lng1', 'title_lng2', 'subtitle', 'subtitle_lng1', 'subtitle_lng2', 'user_alias'], 'string', 'max' => 255],
             [['image'], 'string', 'max' => 512],
             [['intro', 'intro_lng1', 'intro_lng2', 'meta_keywords'], 'string', 'max' => 1024],
+            ['allowed_access_roles', 'each', 'rule' => ['string']],
             [['meta_description'], 'string', 'max' => 2048],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
