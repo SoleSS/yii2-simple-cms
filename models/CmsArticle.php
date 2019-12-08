@@ -118,6 +118,7 @@ class CmsArticle extends base\CmsArticle
             $this->user_id = \Yii::$app->user->id;
             $this->created_at = $this->created_at ?? date('Y-m-d H:i:s');
         }
+
         $this->updated_at = date('Y-m-d H:i:s');
         $this->priority = $this->priority ?? 500;
 
@@ -190,6 +191,14 @@ class CmsArticle extends base\CmsArticle
                 ];
                 $this->rights = $rights;
             }*/
+
+            if (\Yii::$app->db->driverName == 'mysql') {
+                $this->medias = json_encode($this->medias);
+                $this->gallery = json_encode($this->gallery);
+                $this->rights = json_encode($this->rights);
+                $this->allowed_access_roles = json_encode($this->allowed_access_roles);
+            }
+
             if (!empty($this->gallery)) {
                 $result = [];
                 foreach ($this->gallery as $photo) {
