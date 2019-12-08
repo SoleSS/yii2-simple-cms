@@ -192,13 +192,6 @@ class CmsArticle extends base\CmsArticle
                 $this->rights = $rights;
             }*/
 
-            if (\Yii::$app->db->driverName == 'mysql') {
-                $this->medias = json_encode($this->medias);
-                $this->gallery = json_encode($this->gallery);
-                $this->rights = json_encode($this->rights);
-                $this->allowed_access_roles = json_encode($this->allowed_access_roles);
-            }
-
             if (!empty($this->gallery)) {
                 $result = [];
                 foreach ($this->gallery as $photo) {
@@ -242,6 +235,13 @@ class CmsArticle extends base\CmsArticle
                 }
 
                 $this->gallery = $result;
+            }
+
+            if (\Yii::$app->db->driverName == 'mysql') {
+                $this->medias = json_encode($this->medias);
+                $this->gallery = json_encode($this->gallery);
+                $this->rights = json_encode($this->rights);
+                $this->allowed_access_roles = json_encode($this->allowed_access_roles);
             }
 
             return true;
