@@ -48,7 +48,9 @@ use \Spatie\Async\Pool;
  * @property array $rights Права доступа
  * @property array $allowed_access_roles Группы имеющие право на доступ
  * @property string $batchGallery Список файлов галереи
-  * @property boolean $isNewRecord Признак новой записи
+ * @property boolean $isNewRecord Признак новой записи
+ * @property-read string typeName Текстовый вариант типа материала
+ * @property-read string typeSchema Схема микроразметки
  *
  * @property User $user
  * @property CmsCategory[] $cmsCategories
@@ -281,11 +283,11 @@ class CmsArticle extends base\CmsArticle
     }
 
     public function getTypeSchema() {
-        return static::TYPE_SCHEMA[$this->type_id];
+        return static::TYPE_SCHEMA[$this->type_id] ?? null;
     }
 
     public function getTypeName() {
-        return static::TYPE_NAME[$this->type_id];
+        return static::TYPE_NAME[$this->type_id] ?? null;
     }
 
 

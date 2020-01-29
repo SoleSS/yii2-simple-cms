@@ -2,10 +2,13 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use \soless\cms\models\CmsArticle;
 
 /* @var $this yii\web\View */
 /* @var $searchModel soless\cms\models\CmsArticleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
+$get = \Yii::$app->request->get('CmsArticleSearch');
 
 $this->title = 'Материалы';
 $this->params['breadcrumbs'][] = $this->title;
@@ -28,7 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             //'title_lng1',
             //'title_lng2',
-            'type_id',
+            [
+                'attribute' => 'type_id',
+                'format' => 'text',
+                'content' => function(CmsArticle $model){
+                    return $model->typeName;
+                },
+                'filter' => CmsArticle::TYPE_NAME,
+            ],
             //'subtitle',
             //'subtitle_lng1',
             //'subtitle_lng2',
@@ -45,8 +55,29 @@ $this->params['breadcrumbs'][] = $this->title;
             //'amp_full:ntext',
             //'amp_full_lng1:ntext',
             //'amp_full_lng2:ntext',
-            'published',
-            'publish_up',
+            [
+                'attribute' => 'published',
+                'format' => 'text',
+                'content' => function(CmsArticle $model){
+                    return $model->published ? 'Опубликовано' : 'Не опубликовано';
+                },
+                'filter' => ['1' => 'Опубликовано', '0' => 'Не опубликовано'],
+            ],
+            [
+                'attribute' => 'publish_up',
+                'label' => 'Начало публикации',
+                'content' => function(CmsArticle $model) {
+                    return date('d.m.Y H:i', strtotime($model->publish_up));
+                },
+                'filter' => DatePicker::widget([
+                    'name' => 'ArticleSearch[publish_up]',
+                    'value' => isset($get['publish_up']) ? $get['publish_up'] : '',
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'yyyy-mm-dd',
+                    ],
+                ]),
+            ],
             //'publish_down',
             //'user_id',
             //'user_alias',
@@ -54,7 +85,21 @@ $this->params['breadcrumbs'][] = $this->title;
             //'meta_description',
             'hits',
             //'medias',
-            'created_at',
+            [
+                'attribute' => 'created_at',
+                'label' => 'Начало публикации',
+                'content' => function(CmsArticle $model) {
+                    return date('d.m.Y H:i', strtotime($model->created_at));
+                },
+                'filter' => DatePicker::widget([
+                    'name' => 'ArticleSearch[created_at]',
+                    'value' => isset($get['created_at']) ? $get['created_at'] : '',
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'yyyy-mm-dd',
+                    ],
+                ]),
+            ],
             //'updated_at',
 
             ['class' => 'yii\grid\ActionColumn'],
