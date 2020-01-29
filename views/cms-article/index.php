@@ -70,14 +70,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'content' => function(CmsArticle $model) {
                     return date('d.m.Y H:i', strtotime($model->publish_up));
                 },
-                'filter' => DatePicker::widget([
+                /*'filter' => DatePicker::widget([
                     'name' => 'ArticleSearch[publish_up]',
                     'value' => isset($get['publish_up']) ? $get['publish_up'] : '',
                     'pluginOptions' => [
                         'autoclose' => true,
                         'format' => 'yyyy-mm-dd',
                     ],
-                ]),
+                ]),*/
+                'filter' => false,
             ],
             //'publish_down',
             //'user_id',
@@ -88,7 +89,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'medias',
             [
                 'attribute' => 'created_at',
-                'label' => 'Начало публикации',
+                'label' => 'Дата создания',
                 'content' => function(CmsArticle $model) {
                     return date('d.m.Y H:i', strtotime($model->created_at));
                 },
