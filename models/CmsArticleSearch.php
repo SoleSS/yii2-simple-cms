@@ -110,8 +110,8 @@ class CmsArticleSearch extends CmsArticle
         if (!empty($this->image_width)) $query->andFilterWhere(['image_width' => $this->image_width]);
         if (!empty($this->image_height)) $query->andFilterWhere(['image_height' => $this->image_height]);
         if (!empty($this->show_image)) $query->andFilterWhere(['show_image' => $this->show_image]);
-        if (!empty($this->user_id)) $query->andFilterWhere(['user_id' => $this->user_id]);
-        if (!empty($this->priority)) $query->andFilterWhere(['priority' => $this->priority]);
+        //if (!empty($this->user_id)) $query->andFilterWhere(['user_id' => $this->user_id]);
+        //if (!empty($this->priority)) $query->andFilterWhere(['priority' => $this->priority]);
         $query->andFilterWhere(['published' => $this->published]);
         $query->andFilterWhere(['hits' => $this->hits]);
 
