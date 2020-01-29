@@ -4,6 +4,7 @@ namespace soless\cms\controllers;
 
 use Yii;
 use soless\cms\models\CmsArticle;
+use soless\cms\models\CmsArticleSearch;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -46,11 +47,11 @@ class CmsArticleController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => CmsArticle::find(),
-        ]);
+        $searchModel = new CmsArticleSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
