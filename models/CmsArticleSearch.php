@@ -106,16 +106,14 @@ class CmsArticleSearch extends CmsArticle
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'type_id' => $this->type_id,
-            'image_width' => $this->image_width,
-            'image_height' => $this->image_height,
-            'show_image' => $this->show_image,
-            'published' => $this->published,
-            'user_id' => $this->user_id,
-            'hits' => $this->hits,
-            'priority' => $this->priority,
-        ]);
+        if (!empty($this->type_id)) $query->andFilterWhere(['type_id' => $this->type_id]);
+        if (!empty($this->image_width)) $query->andFilterWhere(['image_width' => $this->image_width]);
+        if (!empty($this->image_height)) $query->andFilterWhere(['image_height' => $this->image_height]);
+        if (!empty($this->show_image)) $query->andFilterWhere(['show_image' => $this->show_image]);
+        if (!empty($this->user_id)) $query->andFilterWhere(['user_id' => $this->user_id]);
+        if (!empty($this->priority)) $query->andFilterWhere(['priority' => $this->priority]);
+        $query->andFilterWhere(['published' => $this->published]);
+        $query->andFilterWhere(['hits' => $this->hits]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'title_lng1', $this->title_lng1])
