@@ -91,14 +91,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'content' => function(CmsArticle $model) {
                     return date('d.m.Y H:i', strtotime($model->created_at));
                 },
-                'filter' => DatePicker::widget([
+                /*'filter' => DatePicker::widget([
                     'name' => 'ArticleSearch[created_at]',
                     'value' => isset($get['created_at']) ? $get['created_at'] : '',
                     'pluginOptions' => [
                         'autoclose' => true,
                         'format' => 'yyyy-mm-dd',
                     ],
-                ]),
+                ]),*/
+                'filter' => false,
             ],
             //'updated_at',
 
