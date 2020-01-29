@@ -127,10 +127,10 @@ class CmsArticleSearch extends CmsArticle
             ->andFilterWhere(['like', 'amp_full_lng1', $this->amp_full_lng1])
             ->andFilterWhere(['like', 'amp_full_lng2', $this->amp_full_lng2]);
 
-        $query->andFilterWhere(['>=', 'created_at', date('Y-m-d', strtotime($this->created_at))])
-            ->andFilterWhere(['>=', 'updated_at', date('Y-m-d', strtotime($this->updated_at))])
-            ->andFilterWhere(['>=', 'publish_up', date('Y-m-d', strtotime($this->publish_up))])
-            ->andFilterWhere(['>=', 'publish_down', date('Y-m-d', strtotime($this->publish_down))]);
+        if (!empty($this->created_at)) $query->andFilterWhere(['>=', 'created_at', date('Y-m-d', strtotime($this->created_at))]);
+        if (!empty($this->updated_at)) $query->andFilterWhere(['>=', 'updated_at', date('Y-m-d', strtotime($this->updated_at))]);
+        if (!empty($this->publish_up)) $query->andFilterWhere(['>=', 'publish_up', date('Y-m-d', strtotime($this->publish_up))]);
+        if (!empty($this->publish_down)) $query->andFilterWhere(['>=', 'publish_down', date('Y-m-d', strtotime($this->publish_down))]);
 
         return $dataProvider;
     }
