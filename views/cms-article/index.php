@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use \soless\cms\models\CmsArticle;
+use \kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel soless\cms\models\CmsArticleSearch */
