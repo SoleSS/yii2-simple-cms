@@ -17,7 +17,7 @@
   ],
 
   "require": {
-    "yiisoft/yii2": "~2.0.0",
+    "yiisoft/yii2": "~2.0.14",
     "dektrium/yii2-user": "^0.9.14",
     "kartik-v/yii2-widget-datetimepicker": "*",
     "kartik-v/yii2-widget-select2": "@dev",
