@@ -60,6 +60,9 @@ use \Spatie\Async\Pool;
 class CmsArticle extends base\CmsArticle
 {
 
+    const UNPUBLISHED_STATE = 0;
+    const PUBLISHED_STATE = 1;
+
     public $batchGallery = '';
 
     const TYPE_WEBPAGE              = 1;
@@ -126,8 +129,8 @@ class CmsArticle extends base\CmsArticle
 
         if (!empty($this->image)) {
             $imageSize = $this->getImageParams();
-            $this->image_width = isset($imageSize[0]) ? $imageSize[0] : null;
-            $this->image_height = isset($imageSize[1]) ? $imageSize[1] : null;
+            $this->image_width = isset($imageSize[0]) ? $imageSize[0] : ($this->image_width ?? null);
+            $this->image_height = isset($imageSize[1]) ? $imageSize[1] : ($this->image_height ?? null);
         } else {
             $this->image_width = null;
             $this->image_height = null;
@@ -149,29 +152,28 @@ class CmsArticle extends base\CmsArticle
         return parent::beforeValidate();
     }
 
-    /*public function isUserAccessable() {
-        if (!in_array('all', $this->rights->allowedUsers) && Yii::$app->user->isGuest) return false;
+    public static function publishedQuery () {
+        return static::find()
+            ->where(['cms_article.published' => static::PUBLISHED_STATE])
+            ->andWhere(['<=', 'cms_article.publish_up', date('Y-m-d H:i:s')])
+            ->andWhere(['>=', 'cms_article.publish_down', date('Y-m-d H:i:s')]);
+    }
 
-        if (in_array(Yii::$app->user->id, $this->rights->deniedUsers)) {
-            return false;
-        }
-        foreach ($this->rights->deniedGroups as $group) {
-            if (Yii::$app->user->can($group)) {
-                return false;
-            }
-        }
+    /**
+     * Check if article is published and available to user
+     * @return bool
+     */
+    public function isPublished () {
+        return $this->published == static::PUBLISHED_STATE &&
+            strtotime($this->publish_up) < time() &&
+            strtotime($this->publish_down) > time() &&
+            $this->isUserAccessable();
+    }
 
-        if (in_array('all', $this->rights->allowedUsers) || in_array(Yii::$app->user->id, $this->rights->allowedUsers)) {
-            return true;
-        }
-        if (in_array('all', $this->rights->allowedGroups)) return true;
-        foreach ($this->rights->allowedGroups as $group) {
-            if (Yii::$app->user->can($group)) {
-                return true;
-            }
-        }
-    }*/
-
+    /**
+     * Check if article is available to user
+     * @return bool
+     */
     public function isUserAccessable() {
         if (!in_array('all', $this->allowed_access_roles) && Yii::$app->user->isGuest) return false;
         if (in_array('all', $this->allowed_access_roles)) return true;
