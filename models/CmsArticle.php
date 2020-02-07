@@ -206,8 +206,8 @@ class CmsArticle extends base\CmsArticle
                         }
 
                         $newData = $photo;
-                        $newData['image_width'] = isset($imageSize[0]) ? $imageSize[0] : null;
-                        $newData['image_height'] = isset($imageSize[1]) ? $imageSize[1] : null;
+                        $newData['image_width'] = isset($imageSize[0]) ? $imageSize[0] : ($photo['image_width'] ?? null);
+                        $newData['image_height'] = isset($imageSize[1]) ? $imageSize[1] : ($photo['image_height'] ?? null);
 
                         $result[] = $newData;
                     } catch (\Exception $exception) {
