@@ -38,6 +38,8 @@ use \yii\helpers\Url;
         'multiple'      => false       // возможность выбора нескольких файлов
     ]); ?>
 
+    <?= $form->field($model, 'show_image')->checkbox([]); ?>
+
     <?php echo $form->field($model, 'promo_image_path')->widget(InputFile::className(), [
         'language'      => 'ru',
         'controller'    => 'elfinder', // вставляем название контроллера, по умолчанию равен elfinder
@@ -48,8 +50,6 @@ use \yii\helpers\Url;
         'buttonName' => 'Обзор',
         'multiple'      => false       // возможность выбора нескольких файлов
     ]); ?>
-
-    <?= $form->field($model, 'show_image')->checkbox([]); ?>
 
     <?= $form->field($model, 'intro')->widget(CKEditor::className(), [
         'editorOptions' => ElFinder::ckeditorOptions('elfinder', [
