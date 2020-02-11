@@ -62,7 +62,7 @@ class CmsArticleSearch extends CmsArticle
     public function rules()
     {
         return [
-            [['type_id', 'image_width', 'image_height', 'promo_image_width', 'promo_image_height', 'show_image', 'published', 'user_id', 'hits', 'priority'], 'integer'],
+            [['id', 'type_id', 'image_width', 'image_height', 'promo_image_width', 'promo_image_height', 'show_image', 'published', 'user_id', 'hits', 'priority'], 'integer'],
             [['title', 'title_lng1', 'title_lng2', 'full', 'full_lng1', 'full_lng2', 'amp_full', 'amp_full_lng1', 'amp_full_lng2'], 'string'],
             [['publish_up', 'publish_down', 'created_at', 'updated_at', ], 'safe'],
         ];
