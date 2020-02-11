@@ -51,7 +51,7 @@ use \Spatie\Async\Pool;
  * @property boolean $isNewRecord Признак новой записи
  * @property-read string typeName Текстовый вариант типа материала
  * @property-read string typeSchema Схема микроразметки
- * @property string $promo_image Промо изображение
+ * @property string $promo_image_path Промо изображение
  * @property int $promo_image_width Ширина промо изображения
  * @property int $promo_image_height Высота промо изображения
  *
@@ -139,7 +139,7 @@ class CmsArticle extends base\CmsArticle
             $this->image_height = null;
         }
 
-        if (!empty($this->promo_image)) {
+        if (!empty($this->promo_image_path)) {
             $imageSize = $this->getPromoImageParams();
             $this->promo_image_width = isset($imageSize[0]) ? $imageSize[0] : ($this->promo_image_width ?? null);
             $this->promo_image_height = isset($imageSize[1]) ? $imageSize[1] : ($this->promo_image_height ?? null);
@@ -289,8 +289,8 @@ class CmsArticle extends base\CmsArticle
 
     private function getPromoImageParams() {
         $imageSize = [];
-        if (file_exists((\Yii::$app->params['frontendFilesRoot'] ?? '') . $this->promo_image)) {
-            $imageSize = getimagesize((\Yii::$app->params['frontendFilesRoot'] ?? '') . $this->promo_image);
+        if (file_exists((\Yii::$app->params['frontendFilesRoot'] ?? '') . $this->promo_image_path)) {
+            $imageSize = getimagesize((\Yii::$app->params['frontendFilesRoot'] ?? '') . $this->promo_image_path);
         }
 
         return $imageSize;
