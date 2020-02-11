@@ -38,6 +38,17 @@ use \yii\helpers\Url;
         'multiple'      => false       // возможность выбора нескольких файлов
     ]); ?>
 
+    <?php echo $form->field($model, 'promo_image')->widget(InputFile::className(), [
+        'language'      => 'ru',
+        'controller'    => 'elfinder', // вставляем название контроллера, по умолчанию равен elfinder
+        'filter'        => 'image',    // фильтр файлов, можно задать массив фильтров https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#wiki-onlyMimes
+        'template'      => '<div class="input-group">{input}<span class="input-group-btn">{button}</span></div>',
+        'options'       => ['class' => 'form-control'],
+        'buttonOptions' => ['class' => 'btn btn-default btn-rounded'],
+        'buttonName' => 'Обзор',
+        'multiple'      => false       // возможность выбора нескольких файлов
+    ]); ?>
+
     <?= $form->field($model, 'show_image')->checkbox([]); ?>
 
     <?= $form->field($model, 'intro')->widget(CKEditor::className(), [

@@ -51,6 +51,9 @@ use \Spatie\Async\Pool;
  * @property boolean $isNewRecord Признак новой записи
  * @property-read string typeName Текстовый вариант типа материала
  * @property-read string typeSchema Схема микроразметки
+ * @property string $promo_image Промо изображение
+ * @property int $promo_image_width Ширина промо изображения
+ * @property int $promo_image_height Высота промо изображения
  *
  * @property User $user
  * @property CmsCategory[] $cmsCategories
@@ -135,6 +138,16 @@ class CmsArticle extends base\CmsArticle
             $this->image_width = null;
             $this->image_height = null;
         }
+
+        if (!empty($this->promo_image)) {
+            $imageSize = $this->getPromoImageParams();
+            $this->promo_image_width = isset($imageSize[0]) ? $imageSize[0] : ($this->promo_image_width ?? null);
+            $this->promo_image_height = isset($imageSize[1]) ? $imageSize[1] : ($this->promo_image_height ?? null);
+        } else {
+            $this->promo_image_width = null;
+            $this->promo_image_height = null;
+        }
+
         $ampized = AMP::encode($this->full, (\Yii::$app->params['frontendFilesRoot'] ?? null));
         $this->amp_full = $ampized['content'];
         $this->medias = $ampized['medias'];
@@ -269,6 +282,15 @@ class CmsArticle extends base\CmsArticle
         $imageSize = [];
         if (file_exists((\Yii::$app->params['frontendFilesRoot'] ?? '') . $this->image)) {
             $imageSize = getimagesize((\Yii::$app->params['frontendFilesRoot'] ?? '') . $this->image);
+        }
+
+        return $imageSize;
+    }
+
+    private function getPromoImageParams() {
+        $imageSize = [];
+        if (file_exists((\Yii::$app->params['frontendFilesRoot'] ?? '') . $this->promo_image)) {
+            $imageSize = getimagesize((\Yii::$app->params['frontendFilesRoot'] ?? '') . $this->promo_image);
         }
 
         return $imageSize;

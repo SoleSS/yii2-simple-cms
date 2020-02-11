@@ -44,6 +44,9 @@ use Yii;
  * @property int $priority Приоритет материала
  * @property array $rights Права доступа
  * @property array $allowed_access_roles Группы имеющие право на доступ
+ * @property string $promo_image Промо изображение
+ * @property int $promo_image_width Ширина промо изображения
+ * @property int $promo_image_height Высота промо изображения
  *
  * @property User $user
  * @property CmsArticleCategory[] $cmsArticleCategories
@@ -70,11 +73,11 @@ class CmsArticle extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'intro', 'full', 'publish_up', 'publish_down', 'created_at', 'updated_at', 'priority'], 'required'],
-            [['type_id', 'image_width', 'image_height', 'show_image', 'published', 'user_id', 'hits', 'priority'], 'integer'],
+            [['type_id', 'image_width', 'image_height', 'promo_image_width', 'promo_image_height', 'show_image', 'published', 'user_id', 'hits', 'priority'], 'integer'],
             [['full', 'full_lng1', 'full_lng2', 'amp_full', 'amp_full_lng1', 'amp_full_lng2'], 'string'],
             [['publish_up', 'publish_down', 'medias', 'gallery', 'created_at', 'updated_at', 'params'], 'safe'],
             [['title', 'title_lng1', 'title_lng2', 'subtitle', 'subtitle_lng1', 'subtitle_lng2', 'user_alias'], 'string', 'max' => 255],
-            [['image'], 'string', 'max' => 512],
+            [['image', 'promo_image', ], 'string', 'max' => 512],
             [['intro', 'intro_lng1', 'intro_lng2', 'meta_keywords'], 'string', 'max' => 1024],
             ['allowed_access_roles', 'each', 'rule' => ['string']],
             [['meta_description'], 'string', 'max' => 2048],
@@ -125,6 +128,9 @@ class CmsArticle extends \yii\db\ActiveRecord
             'priority' => 'Приоритет материала',
             'rights' => 'Права доступа',
             'allowed_access_roles' => 'Группы имеющие право на доступ',
+            'promo_image' => 'Промо изображение',
+            'promo_image_width' => 'Ширина промо изображения',
+            'promo_image_height' => 'Высота промо изображения',
         ];
     }
 
