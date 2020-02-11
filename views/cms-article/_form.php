@@ -38,7 +38,7 @@ use \yii\helpers\Url;
         'multiple'      => false       // возможность выбора нескольких файлов
     ]); ?>
 
-    <?php echo $form->field($model, 'promo_image')->widget(InputFile::className(), [
+    <?php echo $form->field($model, 'promo_image_path')->widget(InputFile::className(), [
         'language'      => 'ru',
         'controller'    => 'elfinder', // вставляем название контроллера, по умолчанию равен elfinder
         'filter'        => 'image',    // фильтр файлов, можно задать массив фильтров https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#wiki-onlyMimes
