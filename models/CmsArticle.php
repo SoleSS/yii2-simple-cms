@@ -54,6 +54,7 @@ use \Spatie\Async\Pool;
  * @property string $promo_image_path Промо изображение
  * @property int $promo_image_width Ширина промо изображения
  * @property int $promo_image_height Высота промо изображения
+ * @property-read string $authorName Автор
  *
  * @property User $user
  * @property CmsCategory[] $cmsCategories
@@ -163,6 +164,10 @@ class CmsArticle extends base\CmsArticle
         }
 
         return parent::beforeValidate();
+    }
+
+    public function getAuthorName () {
+        return !empty($this->user_alias) ? $this->user_alias : $this->user->profile->name;
     }
 
     public static function publishedQuery () {
