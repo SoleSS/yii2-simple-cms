@@ -55,6 +55,7 @@ use \Spatie\Async\Pool;
  * @property int $promo_image_width Ширина промо изображения
  * @property int $promo_image_height Высота промо изображения
  * @property-read string $authorName Автор
+ * @property boolean $forceOverwrite Отключить авто-конвертацию параметров
  *
  * @property User $user
  * @property CmsCategory[] $cmsCategories
@@ -63,6 +64,7 @@ use \Spatie\Async\Pool;
  */
 class CmsArticle extends base\CmsArticle
 {
+    public $forceOverwrite = false;
 
     const UNPUBLISHED_STATE = 0;
     const PUBLISHED_STATE = 1;
@@ -123,6 +125,8 @@ class CmsArticle extends base\CmsArticle
 
     public function beforeValidate()
     {
+        if ($this->forceOverwrite) return parent::beforeValidate();
+
         if ($this->isNewRecord) {
             $this->user_id = \Yii::$app->user->id;
             $this->created_at = $this->created_at ?? date('Y-m-d H:i:s');
