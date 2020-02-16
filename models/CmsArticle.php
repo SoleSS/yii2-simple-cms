@@ -56,6 +56,7 @@ use \Spatie\Async\Pool;
  * @property int $promo_image_height Высота промо изображения
  * @property-read string $authorName Автор
  * @property boolean $forceOverwrite Отключить авто-конвертацию параметров
+ * @property-read string|null $introImage Вводное изображение
  *
  * @property User $user
  * @property CmsCategory[] $cmsCategories
@@ -502,6 +503,14 @@ class CmsArticle extends base\CmsArticle
         }
 
         return true;
+    }
+
+    public function getIntroImage() {
+        $image = null;
+
+        if ($this->show_image && !empty($this->image)) $image = $this->image;
+
+        return $image;
     }
 
 
