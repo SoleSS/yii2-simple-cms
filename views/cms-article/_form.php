@@ -239,11 +239,17 @@ use \soless\cms\models\CmsArticle;
             <?= $form->field($model, 'params[ytvideo]')->checkbox([], false)->label('YouTube видео'); ?>
             <?= $form->field($model, 'params[iframe]')->checkbox([], false)->label('IFrame'); ?>
             <?= $form->field($model, 'params[accordion]')->checkbox([], false)->label('AMP Аккордион'); ?>
-            <?= $form->field($model, 'params[carousel]')
-                ->checkbox(['data-toggle' => 'collapse', 'href' => '#carouselParams', 'role' => 'button'], false)
-                ->label('AMP Карусель'); ?>
 
-            <div class="collapse" id="carouselParams">
+            <div class="form-inline">
+                <?= $form->field($model, 'params[carousel]')
+                    ->checkbox([], false)
+                    ->label('AMP Карусель'); ?>
+                <a class="btn btn-primary btn-sm" role="button" data-toggle="collapse" href="#carouselParams">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
+            </div>
+
+            <div class="collapse <?= $model->params['carousel'] ? 'in' : '' ?>" id="carouselParams">
                 <div class="card card-body">
                     <?= $form->field($model, 'carousel_params[position]')->dropDownList([
                         CmsArticle::CAROUSEL_POSITION_TOP => 'Над материалом',
