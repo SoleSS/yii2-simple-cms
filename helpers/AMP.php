@@ -119,6 +119,26 @@ class AMP {
             }
         }
 
+        preg_match_all('/<a.+href="((https?:\/\/)?(\w+?\.)+?(\w+?\/)+\w+?.(mp3|ogg|flac|aac))"(.+)?>.+<\/a>/im', $return, $raw_audios);
+        foreach ( $raw_audios[0] as $i => $audio_tag) {
+            $params = [
+                'type' => null,
+            ];
+            try {
+                $params['type'] = mime_content_type($raw_audios[1][$i]);
+            } catch (\Exception $exception) {
+                \Yii::error($exception);
+            }
+
+            $return = str_replace($audio_tag, '<amp-audio src="'. $raw_audios[1][$i] .'"></amp-audio>', $return);
+
+            $medias[] = [
+                'type' => 'audio',
+                'url' => $raw_audios[1][$i],
+                'params' => $params,
+            ];
+        }
+
         return [
             'content' => $return,
             'medias' => $medias
