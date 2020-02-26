@@ -8,6 +8,7 @@ use \mihaildev\ckeditor\CKEditor;
 use \kartik\datetime\DateTimePicker;
 use \soless\tagEditor\TagEditor;
 use \yii\helpers\Url;
+use \soless\cms\models\CmsArticle;
 
 
 /* @var $this yii\web\View */
@@ -141,8 +142,8 @@ use \yii\helpers\Url;
     </div>
 
     <?= $form->field($model, 'published')->dropDownList([
-        0 => 'Не опубликовано',
-        1 => 'Опубликовано',
+        CmsArticle::UNPUBLISHED_STATE => 'Не опубликовано',
+        CmsArticle::PUBLISHED_STATE => 'Опубликовано',
     ]) ?>
 
     <?= $form->field($model, 'created_at')->widget(DateTimePicker::classname(), [
@@ -244,7 +245,12 @@ use \yii\helpers\Url;
 
             <div class="collapse" id="carouselParams">
                 <div class="card card-body">
-                    <?= $form->field($model, 'carousel_params')->widget(\unclead\multipleinput\MultipleInput::class, [
+                    <?= $form->field($model, 'carousel_params[position]')->dropDownList([
+                        CmsArticle::CAROUSEL_POSITION_TOP => 'Над материалом',
+                        CmsArticle::CAROUSEL_POSITION_BOTTOM => 'Под материалом',
+                    ])->label('Позиция карусели') ?>
+
+                    <?= $form->field($model, 'carousel_params[slides]')->widget(\unclead\multipleinput\MultipleInput::class, [
                         'min' => 0,
                         'columns' => [
                             [
@@ -283,7 +289,7 @@ use \yii\helpers\Url;
                                 ],
                             ],
                         ]
-                    ]);
+                    ])->label('Слайды');
                     ?>
                 </div>
             </div>
