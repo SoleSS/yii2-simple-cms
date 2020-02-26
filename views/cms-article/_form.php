@@ -270,8 +270,17 @@ use \yii\helpers\Url;
                                 'title' => 'Название',
                             ],
                             [
-                                'name' => 'caption',
+                                'name'  => 'description',
+                                'type'  => CKEditor::className(),
                                 'title' => 'Описание',
+                                'options' => [
+                                    'editorOptions' => [
+                                        'preset' => 'basic',
+                                        'inline' => false,
+                                        'height' => '100px',
+                                        'allowedContent' => true,
+                                    ]
+                                ],
                             ],
                         ]
                     ]);

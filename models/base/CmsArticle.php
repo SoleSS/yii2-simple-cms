@@ -132,6 +132,7 @@ class CmsArticle extends \yii\db\ActiveRecord
             'promo_image_path' => 'Промо изображение',
             'promo_image_width' => 'Ширина промо изображения',
             'promo_image_height' => 'Высота промо изображения',
+            'carousel_params' => 'Параметры карусели',
         ];
     }
 
