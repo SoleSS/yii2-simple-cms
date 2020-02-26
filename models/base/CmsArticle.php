@@ -47,6 +47,7 @@ use Yii;
  * @property string $promo_image_path Промо изображение
  * @property int $promo_image_width Ширина промо изображения
  * @property int $promo_image_height Высота промо изображения
+ * @property array $carousel_params Параметры карусели
  *
  * @property User $user
  * @property CmsArticleCategory[] $cmsArticleCategories

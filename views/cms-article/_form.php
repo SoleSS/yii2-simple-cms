@@ -238,7 +238,47 @@ use \yii\helpers\Url;
             <?= $form->field($model, 'params[ytvideo]')->checkbox([], false)->label('YouTube видео'); ?>
             <?= $form->field($model, 'params[iframe]')->checkbox([], false)->label('IFrame'); ?>
             <?= $form->field($model, 'params[accordion]')->checkbox([], false)->label('AMP Аккордион'); ?>
-            <?= $form->field($model, 'params[carousel]')->checkbox([], false)->label('AMP Карусель'); ?>
+            <?= $form->field($model, 'params[carousel]')
+                ->checkbox(['data-toggle' => 'collapse', 'href' => '#carouselParams', 'role' => 'button'], false)
+                ->label('AMP Карусель'); ?>
+
+            <div class="collapse" id="carouselParams">
+                <div class="card card-body">
+                    <?= $form->field($model, 'carousel_params')->widget(\unclead\multipleinput\MultipleInput::class, [
+                        'min' => 0,
+                        'columns' => [
+                            [
+                                'name' => 'path',
+                                'title' => 'Изображение',
+                                'type' => InputFile::class,
+                                'options' => [
+                                    'language'   => 'ru',
+                                    'controller' => 'elfinder',
+                                    'filter'     => 'image',    // фильтр файлов, можно задать массив фильтров https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#wiki-onlyMimes
+                                    'multiple'   => false,
+                                    'template' => '<div class="input-group">{input}<span class="input-group-btn">{button}</span></div>',
+
+                                    'options' => [
+                                        'class' => 'form-control',
+                                    ],
+                                    'buttonOptions' => ['class' => 'btn btn-default btn-rounded'],
+                                    'buttonName' => 'Обзор',
+                                ],
+                            ],
+                            [
+                                'name' => 'title',
+                                'title' => 'Название',
+                            ],
+                            [
+                                'name' => 'caption',
+                                'title' => 'Описание',
+                            ],
+                        ]
+                    ]);
+                    ?>
+                </div>
+            </div>
+
             <?= $form->field($model, 'params[bind]')->checkbox([], false)->label('AMP Bind'); ?>
             <?php if (isset(\Yii::$app->params['flickr'])) : ?>
                 <?= $form->field($model, 'params[flickrAlbumId]')->textInput(['maxlength' => true])->label('Id альбома Flickr') ?>
