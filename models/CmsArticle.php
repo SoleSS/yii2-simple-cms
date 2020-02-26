@@ -284,7 +284,7 @@ class CmsArticle extends base\CmsArticle
 
     public function afterFind()
     {
-        $this->updateCounters(['hits' => 1]);
+        //$this->updateCounters(['hits' => 1]);
         $this->selectedCategories = \yii\helpers\ArrayHelper::getColumn($this->cmsCategories, 'id');
         $this->selectedRelatedTags = implode(',', \yii\helpers\ArrayHelper::getColumn($this->relatedTags, 'title'));
         $this->selectedTags = implode(',', \yii\helpers\ArrayHelper::getColumn($this->tags, 'title'));
