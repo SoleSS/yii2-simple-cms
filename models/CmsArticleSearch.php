@@ -77,6 +77,11 @@ class CmsArticleSearch extends CmsArticle
         return Model::scenarios();
     }
 
+    public function beforeValidate()
+    {
+        return true;
+    }
+
     /**
      * Creates data provider instance with search query applied
      *
@@ -106,14 +111,15 @@ class CmsArticleSearch extends CmsArticle
         }
 
         // grid filtering conditions
-        if (!empty($this->type_id)) $query->andFilterWhere(['type_id' => $this->type_id]);
-        if (!empty($this->image_width)) $query->andFilterWhere(['image_width' => $this->image_width]);
-        if (!empty($this->image_height)) $query->andFilterWhere(['image_height' => $this->image_height]);
-        if (!empty($this->show_image)) $query->andFilterWhere(['show_image' => $this->show_image]);
-        //if (!empty($this->user_id)) $query->andFilterWhere(['user_id' => $this->user_id]);
-        //if (!empty($this->priority)) $query->andFilterWhere(['priority' => $this->priority]);
-        $query->andFilterWhere(['published' => $this->published]);
-        $query->andFilterWhere(['hits' => $this->hits]);
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'type_id' => $this->type_id,
+            'published' => $this->published,
+            'hits' => $this->hits,
+            'user_id' => $this->user_id,
+            'priority' => $this->priority,
+            'show_image' => $this->show_image,
+        ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'title_lng1', $this->title_lng1])
@@ -125,10 +131,10 @@ class CmsArticleSearch extends CmsArticle
             ->andFilterWhere(['like', 'amp_full_lng1', $this->amp_full_lng1])
             ->andFilterWhere(['like', 'amp_full_lng2', $this->amp_full_lng2]);
 
-        /*if (!empty($this->created_at)) $query->andFilterWhere(['>=', 'created_at', date('Y-m-d', strtotime($this->created_at))]);
+        if (!empty($this->created_at)) $query->andFilterWhere(['>=', 'created_at', date('Y-m-d', strtotime($this->created_at))]);
         if (!empty($this->updated_at)) $query->andFilterWhere(['>=', 'updated_at', date('Y-m-d', strtotime($this->updated_at))]);
         if (!empty($this->publish_up)) $query->andFilterWhere(['>=', 'publish_up', date('Y-m-d', strtotime($this->publish_up))]);
-        if (!empty($this->publish_down)) $query->andFilterWhere(['>=', 'publish_down', date('Y-m-d', strtotime($this->publish_down))]);*/
+        if (!empty($this->publish_down)) $query->andFilterWhere(['>=', 'publish_down', date('Y-m-d', strtotime($this->publish_down))]);
 
         return $dataProvider;
     }
