@@ -256,7 +256,7 @@ use \soless\cms\models\CmsArticle;
                         CmsArticle::CAROUSEL_POSITION_BOTTOM => 'Под материалом',
                     ])->label('Позиция карусели') ?>
 
-                    <?= $form->field($model, 'carousel_params[slides]')->widget(\unclead\multipleinput\MultipleInput::class, [
+                    <?= $form->field($model, 'carousel_slides')->widget(\unclead\multipleinput\MultipleInput::class, [
                         'min' => 0,
                         'columns' => [
                             [

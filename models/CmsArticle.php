@@ -58,6 +58,7 @@ use \Spatie\Async\Pool;
  * @property boolean $forceOverwrite Отключить авто-конвертацию параметров
  * @property-read string|null $introImage Вводное изображение
  * @property array $carousel_params Параметры карусели
+ * @property array $carousel_slides Слайды карусели
  *
  * @property User $user
  * @property CmsCategory[] $cmsCategories
