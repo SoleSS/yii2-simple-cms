@@ -26,10 +26,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'title',
+            [
+                'attribute' => 'title',
+                'format' => 'text',
+                'content' => function(CmsArticle $model) {
+                    return \yii\helpers\StringHelper::truncate($model->title, 70);
+                }
+            ],
             //'title_lng1',
             //'title_lng2',
             [
