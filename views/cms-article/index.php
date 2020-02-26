@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return date('d.m.Y H:i', strtotime($model->publish_up));
                 },
                 'filter' => DatePicker::widget([
-                    'name' => 'ArticleSearch[publish_up]',
+                    'name' => 'CmsArticleSearch[publish_up]',
                     'value' => isset($get['publish_up']) ? $get['publish_up'] : '',
                     'pluginOptions' => [
                         'autoclose' => true,
@@ -99,7 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return date('d.m.Y H:i', strtotime($model->created_at));
                 },
                 'filter' => DatePicker::widget([
-                    'name' => 'ArticleSearch[created_at]',
+                    'name' => 'CmsArticleSearch[created_at]',
                     'value' => isset($get['created_at']) ? $get['created_at'] : '',
                     'pluginOptions' => [
                         'autoclose' => true,
