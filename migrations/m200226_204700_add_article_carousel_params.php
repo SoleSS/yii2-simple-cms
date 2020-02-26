@@ -1,7 +1,7 @@
 <?php
 use yii\db\Migration;
 
-class m200211_191100_promo_image extends Migration
+class m200226_204700_add_article_carousel_params extends Migration
 {
     /**
      * {@inheritdoc}
