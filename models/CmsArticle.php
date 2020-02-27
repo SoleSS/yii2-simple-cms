@@ -533,7 +533,8 @@ class CmsArticle extends base\CmsArticle
 
         $slides = [];
         $mobileSlides = [];
-        foreach ($this->carousel_slides as $slide) {
+        $dots = [];
+        foreach ($this->carousel_slides as $i => $slide) {
             $showBackground = false;
             $backgroundImage = null;
             if (file_exists(\Yii::getAlias('@frontend/web'. $slide['background']))) {
@@ -576,9 +577,23 @@ class CmsArticle extends base\CmsArticle
                             </div>
                         </div>
             ';
+
+            $dots[] = '<div 
+                class="dot" 
+                [class]="carousel_'. $this->carousel_params['id'] .'.activeSlide == '. ($i + 1) .'" 
+                on="tap:AMP.setState({ carousel_'. $this->carousel_params['id'] .': { activeSlide: '. ($i + 1) .' } }),comments.goToSlide(index='. ($i + 1) .')" 
+                role="button" 
+                tabindex="'. ($i + 1) .'"></div>';
         }
 
         return '
+        <amp-state id="carousel_'. $this->carousel_params['id'] .'">
+            <script type="application/json">
+                {
+                    "activeSlide": 1
+                }
+            </script>
+        </amp-state>
         <div class="clearfix slider-container xs-hide sm-hide">
             <div class="relative slider-wrap '. $this->carousel_params['additional_slider_classes'] .'">
                 <amp-carousel
@@ -595,6 +610,9 @@ class CmsArticle extends base\CmsArticle
         
         <div class="clearfix mobile-slider slider-container md-hide lg-hide">
             <div class="relative slider-wrap '. $this->carousel_params['additional_slider_classes'] .'">
+               <div class="dots-wrap center">'.
+                    implode("\n", $dots)
+               .'</div>
                 <amp-carousel
                         id="mobile-'. $this->carousel_params['id'] .'"
                         width="'. $this->carousel_params['mobile_width'] .'"
