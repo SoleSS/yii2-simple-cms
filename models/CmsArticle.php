@@ -539,7 +539,10 @@ class CmsArticle extends base\CmsArticle
                 $showBackground = true;
                 try {
                     $imageSize = getimagesize(\Yii::getAlias('@frontend/web' . $slide['background']));
-                    $backgroundImage = '<amp-img src="' . $slide['background'] . '" width="' . $imageSize[0] . '" height="' . $imageSize[1] . '" layout="responsive" class=""></amp-img>';
+                    $backgroundImage = '<amp-img src="' . $this->carousel_params['image_path_prefix'] . $slide['background'] . '" 
+                        width="' . !empty($this->carousel_params['slide_image_width']) ? $this->carousel_params['slide_image_width'] : $imageSize[0] . '" 
+                        height="' . !empty($this->carousel_params['slide_image_height']) ? $this->carousel_params['slide_image_height'] : $imageSize[1] . '" 
+                        layout="responsive" class=""></amp-img>';
                 } catch (\Exception $exception) {
                     \Yii::error($exception);
                     $backgroundImage = null;

@@ -272,6 +272,18 @@ use \soless\cms\models\CmsArticle;
                         ->textInput(['maxlength' => false])
                         ->label('Ширина карусели') ?>
 
+                    <?= $form->field($model, 'carousel_params[image_path_prefix]')
+                        ->textInput(['maxlength' => false])
+                        ->label('Префикс пути к файлу (для ресайза)') ?>
+
+                    <?= $form->field($model, 'carousel_params[slide_image_width]')
+                        ->textInput(['maxlength' => false])
+                        ->label('Ширина изображения (после ресайза)') ?>
+
+                    <?= $form->field($model, 'carousel_params[slide_image_height]')
+                        ->textInput(['maxlength' => false])
+                        ->label('Высота изображения (после ресайза)') ?>
+
                     <?= $form->field($model, 'carousel_slides')->widget(\unclead\multipleinput\MultipleInput::class, [
                         'min' => 0,
                         'columns' => [
