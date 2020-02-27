@@ -272,6 +272,14 @@ use \soless\cms\models\CmsArticle;
                         ->textInput(['maxlength' => false])
                         ->label('Ширина карусели') ?>
 
+                    <?= $form->field($model, 'carousel_params[mobile_width]')
+                        ->textInput(['maxlength' => false])
+                        ->label('Ширина мобильной карусели') ?>
+
+                    <?= $form->field($model, 'carousel_params[mobile_height]')
+                        ->textInput(['maxlength' => false])
+                        ->label('Ширина мобильной карусели') ?>
+
                     <?= $form->field($model, 'carousel_params[image_path_prefix]')
                         ->textInput(['maxlength' => false])
                         ->label('Префикс пути к файлу (для ресайза)') ?>

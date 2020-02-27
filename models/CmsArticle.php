@@ -597,8 +597,8 @@ class CmsArticle extends base\CmsArticle
             <div class="relative slider-wrap '. $this->carousel_params['additional_slider_classes'] .'">
                 <amp-carousel
                         id="mobile-'. $this->carousel_params['id'] .'"
-                        width="'. $this->carousel_params['width'] .'"
-                        height="'. ($this->carousel_params['height'] * 3) .'"
+                        width="'. $this->carousel_params['mobile_width'] .'"
+                        height="'. ($this->carousel_params['mobile_height']) .'"
                         layout="responsive"
                         type="slides"
                 >
