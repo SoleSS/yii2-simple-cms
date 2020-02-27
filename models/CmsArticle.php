@@ -590,7 +590,7 @@ class CmsArticle extends base\CmsArticle
         <amp-state id="carousel_'. $this->carousel_params['id'] .'">
             <script type="application/json">
                 {
-                    "activeSlide": 1
+                    "activeSlide": 0
                 }
             </script>
         </amp-state>
