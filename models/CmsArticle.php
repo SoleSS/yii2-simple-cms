@@ -580,10 +580,10 @@ class CmsArticle extends base\CmsArticle
 
             $dots[] = '<div 
                 class="dot" 
-                [class]="carousel_'. $this->carousel_params['id'] .'.activeSlide == '. ($i + 1) .' ? \'dot active\' : \'dot\'" 
-                on="tap:AMP.setState({ carousel_'. $this->carousel_params['id'] .': { activeSlide: '. ($i + 1) .' } }),mobile-'. $this->carousel_params['id'] .'.goToSlide(index='. ($i + 1) .')" 
+                [class]="carousel_'. $this->carousel_params['id'] .'.activeSlide == '. ($i) .' ? \'dot active\' : \'dot\'" 
+                on="tap:AMP.setState({ carousel_'. $this->carousel_params['id'] .': { activeSlide: '. ($i) .' } }),mobile-'. $this->carousel_params['id'] .'.goToSlide(index='. ($i) .')" 
                 role="button" 
-                tabindex="'. ($i + 1) .'"></div>';
+                tabindex="'. ($i) .'"></div>';
         }
 
         return '
