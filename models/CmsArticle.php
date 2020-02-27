@@ -598,7 +598,7 @@ class CmsArticle extends base\CmsArticle
                 <amp-carousel
                         id="'. $this->carousel_params['id'] .'"
                         width="'. $this->carousel_params['width'] .'"
-                        height="'. ($this->carousel_params['height'] * 2) .'"
+                        height="'. ($this->carousel_params['height'] * 3) .'"
                         layout="responsive"
                         type="slides"
                 >
