@@ -602,7 +602,6 @@ class CmsArticle extends base\CmsArticle
                         height="'. $this->carousel_params['height'] .'"
                         layout="responsive"
                         type="slides"
-                        on="slideChange:AMP.setState({ carousel_'. $this->carousel_params['id'] .': { activeSlide: event.index } })"
                 >
         '. implode("\n", $slides) .'
                 </amp-carousel>
