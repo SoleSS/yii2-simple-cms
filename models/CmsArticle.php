@@ -532,6 +532,7 @@ class CmsArticle extends base\CmsArticle
         if (!$this->params['carousel'] || empty($this->carousel_slides)) return '';
 
         $slides = [];
+        $mobileSlides = [];
         foreach ($this->carousel_slides as $slide) {
             $showBackground = false;
             $backgroundImage = null;
@@ -563,10 +564,22 @@ class CmsArticle extends base\CmsArticle
                             </div>
                         </div>
             ';
+
+            $mobileSlides[] = '
+                        <div class="slide relative">
+                            <div class="image-wrap">'.
+                $backgroundImage
+                            .'</div>
+                            <div class="slide-content">
+                                    <div class="title-wrap">'. $slide['title'] .'</div>
+                                    <div class="description-wrap">'. $slide['description'] .'</div>
+                            </div>
+                        </div>
+            ';
         }
 
         return '
-        <div class="clearfix slider-container">
+        <div class="clearfix slider-container xs-hide sm-hide">
             <div class="relative slider-wrap '. $this->carousel_params['additional_slider_classes'] .'">
                 <amp-carousel
                         id="'. $this->carousel_params['id'] .'"
@@ -576,6 +589,20 @@ class CmsArticle extends base\CmsArticle
                         type="slides"
                 >
         '. implode("\n", $slides) .'
+                </amp-carousel>
+            </div>
+        </div>
+        
+        <div class="clearfix mobile-slider slider-container md-hide lg-hide">
+            <div class="relative slider-wrap '. $this->carousel_params['additional_slider_classes'] .'">
+                <amp-carousel
+                        id="'. $this->carousel_params['id'] .'"
+                        width="'. $this->carousel_params['width'] .'"
+                        height="'. ($this->carousel_params['height'] * 2) .'"
+                        layout="responsive"
+                        type="slides"
+                >
+        '. implode("\n", $mobileSlides) .'
                 </amp-carousel>
             </div>
         </div>
