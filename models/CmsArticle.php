@@ -579,7 +579,7 @@ class CmsArticle extends base\CmsArticle
             ';
 
             $dots[] = '<div 
-                class="dot" 
+                class="dot'. $i == 0 ? ' active' : '' .'" 
                 [class]="carousel_'. $this->carousel_params['id'] .'.activeSlide == '. ($i) .' ? \'dot active\' : \'dot\'" 
                 on="tap:AMP.setState({ carousel_'. $this->carousel_params['id'] .': { activeSlide: '. ($i) .' } }),mobile-'. $this->carousel_params['id'] .'.goToSlide(index='. ($i) .')" 
                 role="button" 
@@ -620,6 +620,7 @@ class CmsArticle extends base\CmsArticle
                         height="'. ($this->carousel_params['mobile_height']) .'"
                         layout="responsive"
                         type="slides"
+                        on="slideChange:AMP.setState({ carousel_'. $this->carousel_params['id'] .': { activeSlide: event.index } })"
                 >
         '. implode("\n", $mobileSlides) .'
                 </amp-carousel>
