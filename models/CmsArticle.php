@@ -596,7 +596,7 @@ class CmsArticle extends base\CmsArticle
         <div class="clearfix mobile-slider slider-container md-hide lg-hide">
             <div class="relative slider-wrap '. $this->carousel_params['additional_slider_classes'] .'">
                 <amp-carousel
-                        id="'. $this->carousel_params['id'] .'"
+                        id="mobile-'. $this->carousel_params['id'] .'"
                         width="'. $this->carousel_params['width'] .'"
                         height="'. ($this->carousel_params['height'] * 3) .'"
                         layout="responsive"
