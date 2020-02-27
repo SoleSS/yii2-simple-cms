@@ -256,11 +256,27 @@ use \soless\cms\models\CmsArticle;
                         CmsArticle::CAROUSEL_POSITION_BOTTOM => 'Под материалом',
                     ])->label('Позиция карусели') ?>
 
+                    <?= $form->field($model, 'carousel_params[id]')
+                        ->textInput(['maxlength' => false])
+                        ->label('id карусели') ?>
+
+                    <?= $form->field($model, 'carousel_params[additional_slider_classes]')
+                        ->textInput(['maxlength' => false])
+                        ->label('Доп. классы карусели') ?>
+
+                    <?= $form->field($model, 'carousel_params[width]')
+                        ->textInput(['maxlength' => false])
+                        ->label('Ширина карусели') ?>
+
+                    <?= $form->field($model, 'carousel_params[height]')
+                        ->textInput(['maxlength' => false])
+                        ->label('Ширина карусели') ?>
+
                     <?= $form->field($model, 'carousel_slides')->widget(\unclead\multipleinput\MultipleInput::class, [
                         'min' => 0,
                         'columns' => [
                             [
-                                'name' => 'path',
+                                'name' => 'background',
                                 'title' => 'Изображение',
                                 'type' => InputFile::class,
                                 'options' => [

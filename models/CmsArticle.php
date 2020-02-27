@@ -59,6 +59,7 @@ use \Spatie\Async\Pool;
  * @property-read string|null $introImage Вводное изображение
  * @property array $carousel_params Параметры карусели
  * @property array $carousel_slides Слайды карусели
+ * @property-read string $ampCarousel
  *
  * @property User $user
  * @property CmsCategory[] $cmsCategories
@@ -267,6 +268,14 @@ class CmsArticle extends base\CmsArticle
                 }
 
                 $this->gallery = $result;
+            }
+
+            if (isset($this->params['carousel']) && $this->params['carousel']) {
+                if ($this->carousel_params['position'] == static::CAROUSEL_POSITION_TOP) {
+                    $this->amp_full = $this->ampCarousel . $this->amp_full;
+                } elseif ($this->carousel_params['position'] == static::CAROUSEL_POSITION_BOTTOM) {
+                    $this->amp_full = $this->amp_full . $this->ampCarousel;
+                }
             }
 
             return true;
@@ -516,6 +525,50 @@ class CmsArticle extends base\CmsArticle
         if ($this->show_image && !empty($this->image)) $image = $this->image;
 
         return $image;
+    }
+
+
+    public function getAmpCarousel () {
+        if (!$this->params['carousel'] || empty($this->carousel_slides)) return '';
+
+        $slides = [];
+        foreach ($this->carousel_slides as $slide) {
+            $showBackground = false;
+            if (file_exists(\Yii::getAlias('@frontend/web'. $slide['background']))) {
+                $showBackground = true;
+                $imageSize = getimagesize(\Yii::getAlias('@frontend/web' . $slide['background']));
+            }
+            $slides[] = '
+                        <div class="slide relative">
+                            <div class="background-wrap relative">
+                            '.
+                                $showBackground ? '<amp-img src="'. $slide['background'] .'" width="'. $imageSize[0] .'" height="'. $imageSize[1] .'" layout="responsive" class=""></amp-img>' : ''
+                            .'</div>
+                            <div class="background-wrap absolute">
+                                <div class="slide-content absolute">
+                                    <div class="title-wrap">'. $slide['title'] .'</div>
+                                    <div class="description-wrap">'. $slide['description'] .'</div>
+                                </div>
+                            </div>
+                        </div>
+            ';
+        }
+
+        return '
+        <div class="clearfix slider-container">
+            <div class="relative slider-wrap '. $this->carousel_params['additional_slider_classes'] .'">
+                <amp-carousel
+                        id="'. $this->carousel_params['id'] .'"
+                        width="'. $this->carousel_params['width'] .'"
+                        height="'. $this->carousel_params['height'] .'"
+                        layout="responsive"
+                        type="slides"
+                >
+        '. implode("\n", $slides) .'
+                </amp-carousel>
+            </div>
+        </div>
+        ';
     }
 
 
