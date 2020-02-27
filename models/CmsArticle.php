@@ -534,18 +534,26 @@ class CmsArticle extends base\CmsArticle
         $slides = [];
         foreach ($this->carousel_slides as $slide) {
             $showBackground = false;
+            $backgroundImage = null;
             if (file_exists(\Yii::getAlias('@frontend/web'. $slide['background']))) {
                 $showBackground = true;
-                $imageSize = getimagesize(\Yii::getAlias('@frontend/web' . $slide['background']));
+                try {
+                    $imageSize = getimagesize(\Yii::getAlias('@frontend/web' . $slide['background']));
+                    $backgroundImage = '<amp-img src="' . $slide['background'] . '" width="' . $imageSize[0] . '" height="' . $imageSize[1] . '" layout="responsive" class=""></amp-img>';
+                } catch (\Exception $exception) {
+                    \Yii::error($exception);
+                    $backgroundImage = null;
+                }
             }
+
             $slides[] = '
                         <div class="slide relative">
                             <div class="background-wrap relative">
                             '.
-                                $showBackground ? '<amp-img src="'. $slide['background'] .'" width="'. $imageSize[0] .'" height="'. $imageSize[1] .'" layout="responsive" class=""></amp-img>' : ''
+                            $backgroundImage
                             .'</div>
-                            <div class="background-wrap absolute">
-                                <div class="slide-content absolute">
+                            <div class="content-wrap absolute">
+                                <div class="slide-content">
                                     <div class="title-wrap">'. $slide['title'] .'</div>
                                     <div class="description-wrap">'. $slide['description'] .'</div>
                                 </div>
