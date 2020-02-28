@@ -38,13 +38,21 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             //'title_lng1',
             //'title_lng2',
-            [
+            /*[
                 'attribute' => 'type_id',
                 'format' => 'text',
                 'content' => function(CmsArticle $model){
                     return $model->typeName;
                 },
                 'filter' => CmsArticle::TYPE_NAME,
+            ],*/
+            [
+                'attribute' => 'category_id',
+                'label' => 'Категория',
+                'content' => function(CmsArticle $model) {
+                    return implode(', ', $model->cmsCategoriesList);
+                },
+                'filter' => \soless\cms\models\CmsCategory::asArray(),
             ],
             //'subtitle',
             //'subtitle_lng1',

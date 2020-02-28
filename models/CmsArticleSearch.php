@@ -48,6 +48,7 @@ use soless\cms\models\CmsArticle;
  * @property array $allowed_access_roles Группы имеющие право на доступ
  * @property string $batchGallery Список файлов галереи
  * @property boolean $isNewRecord Признак новой записи
+ * @property integer $category_id
  *
  * @property User $user
  * @property CmsCategory[] $cmsCategories
@@ -56,13 +57,15 @@ use soless\cms\models\CmsArticle;
  */
 class CmsArticleSearch extends CmsArticle
 {
+    public $category_id;
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'type_id', 'image_width', 'image_height', 'promo_image_width', 'promo_image_height', 'show_image', 'published', 'user_id', 'hits', 'priority'], 'integer'],
+            [['id', 'type_id', 'image_width', 'image_height', 'promo_image_width', 'promo_image_height', 'show_image', 'published', 'user_id', 'hits', 'priority', 'category_id', ], 'integer'],
             [['title', 'title_lng1', 'title_lng2', 'full', 'full_lng1', 'full_lng2', 'amp_full', 'amp_full_lng1', 'amp_full_lng2'], 'string'],
             [['publish_up', 'publish_down', 'created_at', 'updated_at', ], 'safe'],
         ];
@@ -91,7 +94,8 @@ class CmsArticleSearch extends CmsArticle
      */
     public function search($params)
     {
-        $query = CmsArticle::find();
+        $query = CmsArticle::find()
+            ->joinWith(['cmsCategories']);
 
         // add conditions that should always apply here
 
@@ -135,6 +139,7 @@ class CmsArticleSearch extends CmsArticle
         if (!empty($this->updated_at)) $query->andFilterWhere(['>=', 'updated_at', date('Y-m-d', strtotime($this->updated_at))]);
         if (!empty($this->publish_up)) $query->andFilterWhere(['>=', 'publish_up', date('Y-m-d', strtotime($this->publish_up))]);
         if (!empty($this->publish_down)) $query->andFilterWhere(['>=', 'publish_down', date('Y-m-d', strtotime($this->publish_down))]);
+        if (!empty($this->category_id)) $query->andFilterWhere([CmsCategory::tableName().'.id' => $this->category_id]);
 
         return $dataProvider;
     }

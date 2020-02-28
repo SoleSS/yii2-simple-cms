@@ -60,6 +60,7 @@ use \Spatie\Async\Pool;
  * @property array $carousel_params Параметры карусели
  * @property array $carousel_slides Слайды карусели
  * @property-read string $ampCarousel
+ * @property-read array $cmsCategoriesList
  *
  * @property User $user
  * @property CmsCategory[] $cmsCategories
@@ -525,6 +526,10 @@ class CmsArticle extends base\CmsArticle
         if ($this->show_image && !empty($this->image)) $image = $this->image;
 
         return $image;
+    }
+
+    public function getCmsCategoriesList () {
+        return \yii\helpers\ArrayHelper::map($this->cmsCategories, 'id', 'title');
     }
 
 

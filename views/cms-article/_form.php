@@ -71,6 +71,10 @@ use \soless\cms\models\CmsArticle;
         ]),
     ]); ?>
 
+    <?php if (\Yii::$app->hasModule('ps')) : ?>
+
+    <?php endif; ?>
+
     <div class="panel-group">
         <div class="panel panel-default">
             <div class="panel-heading">
