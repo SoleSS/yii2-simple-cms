@@ -72,7 +72,7 @@ use \soless\cms\models\CmsArticle;
     ]); ?>
 
     <?php if (\Yii::$app->hasModule('ps')) : ?>
-
+        <?= $form->field($model, 'params[poll_id]')->dropDownList(\soless\poll\models\PsPoll::asArray()) ?>
     <?php endif; ?>
 
     <div class="panel-group">
