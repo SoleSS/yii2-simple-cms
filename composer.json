@@ -28,7 +28,8 @@
     "soless/yii2-tag-editor": "*",
     "yiisoft/yii2-httpclient": "~2.0.0",
     "spatie/async": "^1.0",
-    "kartik-v/yii2-widget-datepicker": "@dev"
+    "kartik-v/yii2-widget-datepicker": "@dev",
+    "soless/yii2-amp-helpers": "*"
   },
 
   "autoload": {
