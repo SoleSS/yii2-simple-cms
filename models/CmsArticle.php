@@ -602,7 +602,7 @@ class CmsArticle extends base\CmsArticle
                 }
             </script>
         </amp-state>
-        <div class="clearfix slider-container xs-hide sm-hide">
+        <div class="clearfix slider-container desktop-slider xs-hide sm-hide">
             <div class="relative slider-wrap '. $this->carousel_params['additional_slider_classes'] .'">
                <div class="dots-wrap center">'.
                     implode("\n", $dots)
