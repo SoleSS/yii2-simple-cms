@@ -578,10 +578,17 @@ class CmsArticle extends base\CmsArticle
                         </div>
             ';
 
+            $mobileDots[] = '<div 
+                class="dot'. ($i == 0 ? ' active' : '') .'" 
+                [class]="carousel_'. $this->carousel_params['id'] .'.activeMobileSlide == '. ($i) .' ? \'dot active\' : \'dot\'" 
+                on="tap:AMP.setState({ carousel_'. $this->carousel_params['id'] .': { activeMobileSlide: '. ($i) .' } }),mobile-'. $this->carousel_params['id'] .'.goToSlide(index='. ($i) .')" 
+                role="button" 
+                tabindex="'. ($i) .'"></div>';
+
             $dots[] = '<div 
                 class="dot'. ($i == 0 ? ' active' : '') .'" 
                 [class]="carousel_'. $this->carousel_params['id'] .'.activeSlide == '. ($i) .' ? \'dot active\' : \'dot\'" 
-                on="tap:AMP.setState({ carousel_'. $this->carousel_params['id'] .': { activeSlide: '. ($i) .' } }),mobile-'. $this->carousel_params['id'] .'.goToSlide(index='. ($i) .')" 
+                on="tap:AMP.setState({ carousel_'. $this->carousel_params['id'] .': { activeSlide: '. ($i) .' } }),'. $this->carousel_params['id'] .'.goToSlide(index='. ($i) .')" 
                 role="button" 
                 tabindex="'. ($i) .'"></div>';
         }
@@ -590,18 +597,23 @@ class CmsArticle extends base\CmsArticle
         <amp-state id="carousel_'. $this->carousel_params['id'] .'">
             <script type="application/json">
                 {
+                    "activeMobileSlide": 0,
                     "activeSlide": 0
                 }
             </script>
         </amp-state>
         <div class="clearfix slider-container xs-hide sm-hide">
             <div class="relative slider-wrap '. $this->carousel_params['additional_slider_classes'] .'">
+               <div class="dots-wrap center">'.
+                    implode("\n", $dots)
+                .'</div>
                 <amp-carousel
                         id="'. $this->carousel_params['id'] .'"
                         width="'. $this->carousel_params['width'] .'"
                         height="'. $this->carousel_params['height'] .'"
                         layout="responsive"
                         type="slides"
+                        on="slideChange:AMP.setState({ carousel_'. $this->carousel_params['id'] .': { activeSlide: event.index } })"
                 >
         '. implode("\n", $slides) .'
                 </amp-carousel>
@@ -611,7 +623,7 @@ class CmsArticle extends base\CmsArticle
         <div class="clearfix mobile-slider slider-container md-hide lg-hide">
             <div class="relative slider-wrap '. $this->carousel_params['additional_slider_classes'] .'">
                <div class="dots-wrap center">'.
-                    implode("\n", $dots)
+                    implode("\n", $mobileDots)
                .'</div>
                 <amp-carousel
                         id="mobile-'. $this->carousel_params['id'] .'"
@@ -619,7 +631,7 @@ class CmsArticle extends base\CmsArticle
                         height="'. ($this->carousel_params['mobile_height']) .'"
                         layout="responsive"
                         type="slides"
-                        on="slideChange:AMP.setState({ carousel_'. $this->carousel_params['id'] .': { activeSlide: event.index } })"
+                        on="slideChange:AMP.setState({ carousel_'. $this->carousel_params['id'] .': { activeMobileSlide: event.index } })"
                 >
         '. implode("\n", $mobileSlides) .'
                 </amp-carousel>
