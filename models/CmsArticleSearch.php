@@ -116,29 +116,29 @@ class CmsArticleSearch extends CmsArticle
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'type_id' => $this->type_id,
-            'published' => $this->published,
-            'hits' => $this->hits,
-            'user_id' => $this->user_id,
-            'priority' => $this->priority,
-            'show_image' => $this->show_image,
+            CmsArticle::tableName() . '.id' => $this->id,
+            CmsArticle::tableName() . '.type_id' => $this->type_id,
+            CmsArticle::tableName() . '.published' => $this->published,
+            CmsArticle::tableName() . '.hits' => $this->hits,
+            CmsArticle::tableName() . '.user_id' => $this->user_id,
+            CmsArticle::tableName() . '.priority' => $this->priority,
+            CmsArticle::tableName() . '.show_image' => $this->show_image,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'title_lng1', $this->title_lng1])
-            ->andFilterWhere(['like', 'title_lng2', $this->title_lng1])
-            ->andFilterWhere(['like', 'full', $this->full])
-            ->andFilterWhere(['like', 'full_lng1', $this->full_lng1])
-            ->andFilterWhere(['like', 'full_lng2', $this->full_lng2])
-            ->andFilterWhere(['like', 'amp_full', $this->amp_full])
-            ->andFilterWhere(['like', 'amp_full_lng1', $this->amp_full_lng1])
-            ->andFilterWhere(['like', 'amp_full_lng2', $this->amp_full_lng2]);
+        $query->andFilterWhere(['like', CmsArticle::tableName() . '.title', $this->title])
+            ->andFilterWhere(['like', CmsArticle::tableName() . '.title_lng1', $this->title_lng1])
+            ->andFilterWhere(['like', CmsArticle::tableName() . '.title_lng2', $this->title_lng1])
+            ->andFilterWhere(['like', CmsArticle::tableName() . '.full', $this->full])
+            ->andFilterWhere(['like', CmsArticle::tableName() . '.full_lng1', $this->full_lng1])
+            ->andFilterWhere(['like', CmsArticle::tableName() . '.full_lng2', $this->full_lng2])
+            ->andFilterWhere(['like', CmsArticle::tableName() . '.amp_full', $this->amp_full])
+            ->andFilterWhere(['like', CmsArticle::tableName() . '.amp_full_lng1', $this->amp_full_lng1])
+            ->andFilterWhere(['like', CmsArticle::tableName() . '.amp_full_lng2', $this->amp_full_lng2]);
 
-        if (!empty($this->created_at)) $query->andFilterWhere(['>=', 'created_at', date('Y-m-d', strtotime($this->created_at))]);
-        if (!empty($this->updated_at)) $query->andFilterWhere(['>=', 'updated_at', date('Y-m-d', strtotime($this->updated_at))]);
-        if (!empty($this->publish_up)) $query->andFilterWhere(['>=', 'publish_up', date('Y-m-d', strtotime($this->publish_up))]);
-        if (!empty($this->publish_down)) $query->andFilterWhere(['>=', 'publish_down', date('Y-m-d', strtotime($this->publish_down))]);
+        if (!empty($this->created_at)) $query->andFilterWhere(['>=', CmsArticle::tableName() . '.created_at', date('Y-m-d', strtotime($this->created_at))]);
+        if (!empty($this->updated_at)) $query->andFilterWhere(['>=', CmsArticle::tableName() . '.updated_at', date('Y-m-d', strtotime($this->updated_at))]);
+        if (!empty($this->publish_up)) $query->andFilterWhere(['>=', CmsArticle::tableName() . '.publish_up', date('Y-m-d', strtotime($this->publish_up))]);
+        if (!empty($this->publish_down)) $query->andFilterWhere(['>=', CmsArticle::tableName() . '.publish_down', date('Y-m-d', strtotime($this->publish_down))]);
         if (!empty($this->category_id)) $query->andFilterWhere([CmsCategory::tableName().'.id' => $this->category_id]);
 
         return $dataProvider;
