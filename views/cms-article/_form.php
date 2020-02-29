@@ -73,10 +73,7 @@ use \soless\cms\models\CmsArticle;
 
     <?php if (\Yii::$app->hasModule('ps')) : ?>
         <?= $form->field($model, 'params[poll_id]')->dropDownList(
-            array_merge(
-                [0 => 'Не выбрано'],
-                \soless\poll\models\PsPoll::asArray()
-            )
+                [0 => 'Не выбрано'] + \soless\poll\models\PsPoll::asArray()
         )->label('Связанный опрос') ?>
     <?php endif; ?>
 
