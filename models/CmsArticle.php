@@ -61,6 +61,7 @@ use \Spatie\Async\Pool;
  * @property array $carousel_slides Слайды карусели
  * @property-read string $ampCarousel
  * @property-read array $cmsCategoriesList
+ * @property-read \soless\poll\models\PsPoll $psPoll
  *
  * @property User $user
  * @property CmsCategory[] $cmsCategories
@@ -530,6 +531,12 @@ class CmsArticle extends base\CmsArticle
 
     public function getCmsCategoriesList () {
         return \yii\helpers\ArrayHelper::map($this->cmsCategories, 'id', 'title');
+    }
+
+    public function getPsPoll () {
+        if (!\Yii::$app->hasModule('ps') || empty($this->params['poll_id'])) return null;
+
+        return \soless\poll\models\PsPoll::findOne((int)$this->params['poll_id']);
     }
 
 
