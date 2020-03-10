@@ -19,10 +19,13 @@ namespace soless\cms\models;
  */
 class CmsTag extends base\CmsTag
 {
+    const DEFAULT_PRIORITY = 10;
+
     public function beforeValidate()
     {
         if ($this->isNewRecord) {
             $this->created_at = date('Y-m-d H:i:s');
+            $this->priority = static::DEFAULT_PRIORITY;
         }
         $this->updated_at = date('Y-m-d H:i:s');
 
