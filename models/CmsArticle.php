@@ -564,12 +564,12 @@ class CmsArticle extends base\CmsArticle
             }
 
             $slides[] = '
-                        <div class="slide relative">
-                            <div class="background-wrap relative">
+                        <div class="slide desktop-slide-wrap">
+                            <div class="background-wrap">
                             '.
                             $backgroundImage
                             .'</div>
-                            <div class="content-wrap absolute">
+                            <div class="content-wrap">
                                 <div class="slide-content">
                                     <div class="title-wrap">'. $slide['title'] .'</div>
                                     <div class="description-wrap">'. $slide['description'] .'</div>
@@ -579,7 +579,7 @@ class CmsArticle extends base\CmsArticle
             ';
 
             $mobileSlides[] = '
-                        <div class="slide relative">
+                        <div class="slide mobile-slide-wrap">
                             <div class="image-wrap">'.
                 $backgroundImage
                             .'</div>
