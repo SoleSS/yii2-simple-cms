@@ -276,7 +276,7 @@ use \soless\cms\models\CmsArticle;
 
                     <?= $form->field($model, 'carousel_params[height]')
                         ->textInput(['maxlength' => false])
-                        ->label('Ширина карусели') ?>
+                        ->label('Высота карусели') ?>
 
                     <?= $form->field($model, 'carousel_params[mobile_width]')
                         ->textInput(['maxlength' => false])
