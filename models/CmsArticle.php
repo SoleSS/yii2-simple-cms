@@ -569,7 +569,7 @@ class CmsArticle extends base\CmsArticle
                             '.
                             $backgroundImage
                             .'</div>
-                            <div class="content-wrap">
+                            <div class="inner-wrap">
                                 <div class="slide-content">
                                     <div class="title-wrap">'. $slide['title'] .'</div>
                                     <div class="description-wrap">'. $slide['description'] .'</div>
