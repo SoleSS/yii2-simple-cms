@@ -244,6 +244,7 @@ use \soless\cms\models\CmsArticle;
         <div class="panel-body">
             <?= $form->field($model, 'params[ytvideo]')->checkbox([], false)->label('YouTube видео'); ?>
             <?= $form->field($model, 'params[iframe]')->checkbox([], false)->label('IFrame'); ?>
+            <?= $form->field($model, 'params[audio]')->checkbox([], false)->label('AMP Аудио'); ?>
             <?= $form->field($model, 'params[accordion]')->checkbox([], false)->label('AMP Аккордион'); ?>
 
             <div class="form-inline">
