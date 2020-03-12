@@ -563,6 +563,9 @@ class CmsArticle extends base\CmsArticle
                 }
             }
 
+            $ampized = AMP::encode($slide['description'], (\Yii::$app->params['frontendFilesRoot'] ?? null));
+            $description = $ampized['content'];
+
             $slides[] = '
                         <div class="slide desktop-slide-wrap">
                             <div class="background-wrap">
@@ -572,7 +575,7 @@ class CmsArticle extends base\CmsArticle
                             <div class="inner-wrap">
                                 <div class="slide-content">
                                     <div class="title-wrap">'. $slide['title'] .'</div>
-                                    <div class="description-wrap">'. $slide['description'] .'</div>
+                                    <div class="description-wrap">'. $description .'</div>
                                 </div>
                             </div>
                         </div>
@@ -585,7 +588,7 @@ class CmsArticle extends base\CmsArticle
                             .'</div>
                             <div class="slide-content">
                                     <div class="title-wrap">'. $slide['title'] .'</div>
-                                    <div class="description-wrap">'. $slide['description'] .'</div>
+                                    <div class="description-wrap">'. $description .'</div>
                             </div>
                         </div>
             ';
