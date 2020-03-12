@@ -119,7 +119,7 @@ class AMP {
             }
         }
 
-        preg_match_all('/<a.+href="((https?:\/\/)?(\w+?\.)+?(\w+?\/)+\w+?.(mp3|ogg|flac|aac))"(.+)?>.+<\/a>/im', $return, $raw_audios);
+        preg_match_all('/<a.+href="(([\w\/]+)\.(mp3|ogg|flac|aac))"(.+)?>.+<\/a>/im', $return, $raw_audios);
         foreach ( $raw_audios[0] as $i => $audio_tag) {
             $params = [
                 'type' => null,
