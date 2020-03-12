@@ -329,12 +329,13 @@ use \soless\cms\models\CmsArticle;
                                 'type'  => CKEditor::className(),
                                 'title' => 'Описание',
                                 'options' => [
-                                    'editorOptions' => [
+                                    'editorOptions' => ElFinder::ckeditorOptions('elfinder', [
                                         'preset' => 'basic',
                                         'inline' => false,
                                         'height' => '100px',
-                                        'allowedContent' => true,
-                                    ]
+                                        'allowedContent' => false,
+                                        'removePlugins' => 'image',
+                                    ]),
                                 ],
                             ],
                         ]
