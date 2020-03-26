@@ -125,7 +125,7 @@ class AMP {
                 'type' => null,
             ];
             try {
-                $params['type'] = mime_content_type($raw_audios[1][$i]);
+                $params['type'] = mime_content_type($filesRoot . $raw_audios[1][$i]);
             } catch (\Exception $exception) {
                 \Yii::error($exception);
             }
