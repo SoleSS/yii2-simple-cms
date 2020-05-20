@@ -351,6 +351,25 @@ use \soless\cms\models\CmsArticle;
         </div>
     </div>
 
+    <?php if (isset(\Yii::$app->params['customArticleParams'])) : ?>
+        <?= $form->field($model, 'custom_params')->widget(\unclead\multipleinput\MultipleInput::class, [
+            'min' => 0,
+            'columns' => [
+                [
+                    'name'  => 'customAttributeName',
+                    'type'  => 'dropDownList',
+                    'title' => 'Параметр',
+                    'items' => isset(\Yii::$app->params['customArticleParams']['customAttributes']) ? \Yii::$app->params['customArticleParams']['customAttributes'] : [],
+                ],
+                [
+                    'name' => 'customAttributeValue',
+                    'title' => 'Значение',
+                ],
+            ]
+        ]);
+        ?>
+    <?php endif; ?>
+
     <?php if (isset(\Yii::$app->params['cmsRights'])) : ?>
         <div class="panel panel-default">
             <div class="panel-heading">Параметры доступа</div>

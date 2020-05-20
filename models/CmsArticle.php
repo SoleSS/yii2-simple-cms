@@ -59,6 +59,7 @@ use \Spatie\Async\Pool;
  * @property-read string|null $introImage Вводное изображение
  * @property array $carousel_params Параметры карусели
  * @property array $carousel_slides Слайды карусели
+ * @property array $custom_params Специальные параметры материала
  * @property-read string $ampCarousel
  * @property-read array $cmsCategoriesList
  * @property-read \soless\poll\models\PsPoll $psPoll

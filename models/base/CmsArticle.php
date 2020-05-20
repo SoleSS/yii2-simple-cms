@@ -49,6 +49,7 @@ use Yii;
  * @property int $promo_image_height Высота промо изображения
  * @property array $carousel_params Параметры карусели
  * @property array $carousel_slides Слайды карусели
+ * @property array $custom_params Специальные параметры материала
  *
  * @property User $user
  * @property CmsArticleCategory[] $cmsArticleCategories
@@ -77,7 +78,7 @@ class CmsArticle extends \yii\db\ActiveRecord
             [['title', 'intro', 'full', 'publish_up', 'publish_down', 'created_at', 'updated_at', 'priority'], 'required'],
             [['type_id', 'image_width', 'image_height', 'promo_image_width', 'promo_image_height', 'show_image', 'published', 'user_id', 'hits', 'priority'], 'integer'],
             [['full', 'full_lng1', 'full_lng2', 'amp_full', 'amp_full_lng1', 'amp_full_lng2'], 'string'],
-            [['publish_up', 'publish_down', 'medias', 'gallery', 'created_at', 'updated_at', 'params', 'carousel_params', 'carousel_slides', ], 'safe'],
+            [['publish_up', 'publish_down', 'medias', 'gallery', 'created_at', 'updated_at', 'params', 'carousel_params', 'carousel_slides', 'custom_params'], 'safe'],
             [['title', 'title_lng1', 'title_lng2', 'subtitle', 'subtitle_lng1', 'subtitle_lng2', 'user_alias'], 'string', 'max' => 255],
             [['image', 'promo_image_path', ], 'string', 'max' => 512],
             [['intro', 'intro_lng1', 'intro_lng2', 'meta_keywords'], 'string', 'max' => 1024],
@@ -118,7 +119,7 @@ class CmsArticle extends \yii\db\ActiveRecord
             'publish_up' => 'Дата начала публикации',
             'publish_down' => 'Дата окончания публикации',
             'user_id' => 'id Автора',
-            'user_alias' => 'Алиас автора',
+            'user_alias' => 'Псевдоним автора',
             'meta_keywords' => 'Meta keywords',
             'meta_description' => 'Meta description',
             'hits' => 'Кол-во просмотров',
@@ -135,6 +136,7 @@ class CmsArticle extends \yii\db\ActiveRecord
             'promo_image_height' => 'Высота промо изображения',
             'carousel_params' => 'Параметры карусели',
             'carousel_slides' => 'Слайды карусели',
+            'custom_params' => 'Специальные параметры материала',
         ];
     }
 
