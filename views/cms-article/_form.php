@@ -359,7 +359,7 @@ use \soless\cms\models\CmsArticle;
                     'name'  => 'customAttributeName',
                     'type'  => 'dropDownList',
                     'title' => 'Параметр',
-                    'items' => isset(\Yii::$app->params['customArticleParams']['customAttributes']) ? \Yii::$app->params['customArticleParams']['customAttributes'] : [],
+                    'items' => (isset(\Yii::$app->params['customArticleParams']) && isset(\Yii::$app->params['customArticleParams']['customAttributes'])) ? \Yii::$app->params['customArticleParams']['customAttributes'] : [],
                 ],
                 [
                     'name' => 'customAttributeValue',
