@@ -14,6 +14,11 @@ $get = \Yii::$app->request->get('CmsArticleSearch');
 $this->title = 'Материалы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<style>
+    .grid-view td {
+        white-space: normal;
+    }
+</style>
 <div class="cms-article-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -28,7 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            [
+                'attribute' => 'id',
+                'contentOptions' => ['style' => 'width:50px'],
+            ],
             [
                 'attribute' => 'title',
                 'format' => 'text',
@@ -48,6 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],*/
             [
                 'attribute' => 'category_id',
+                'contentOptions' => ['style' => 'width:150px'],
                 'label' => 'Категория',
                 'content' => function(CmsArticle $model) {
                     return implode(', ', $model->cmsCategoriesList);
@@ -72,6 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'amp_full_lng2:ntext',
             [
                 'attribute' => 'published',
+                'contentOptions' => ['style' => 'width:120px'],
                 'format' => 'text',
                 'content' => function(CmsArticle $model){
                     return $model->published ? 'Опубликовано' : 'Не опубликовано';
@@ -80,6 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'publish_up',
+                'contentOptions' => ['style' => 'width:150px'],
                 'label' => 'Начало публикации',
                 'content' => function(CmsArticle $model) {
                     return date('d.m.Y H:i', strtotime($model->publish_up));
@@ -98,10 +109,14 @@ $this->params['breadcrumbs'][] = $this->title;
             //'user_alias',
             //'meta_keywords',
             //'meta_description',
-            'hits',
+            [
+                'attribute' => 'hits',
+                'contentOptions' => ['style' => 'width:60px'],
+            ],
             //'medias',
             [
                 'attribute' => 'created_at',
+                'contentOptions' => ['style' => 'width:150px'],
                 'label' => 'Дата создания',
                 'content' => function(CmsArticle $model) {
                     return date('d.m.Y H:i', strtotime($model->created_at));
