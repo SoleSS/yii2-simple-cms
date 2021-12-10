@@ -256,7 +256,7 @@ use \soless\cms\models\CmsArticle;
                 </a>
             </div>
 
-            <div class="collapse <?= $model->params['carousel'] ? 'in' : '' ?>" id="carouselParams">
+            <div class="collapse <?= (isset($model->params['carousel']) && $model->params['carousel']) ? 'in' : '' ?>" id="carouselParams">
                 <div class="card card-body">
                     <?= $form->field($model, 'carousel_params[position]')->dropDownList([
                         CmsArticle::CAROUSEL_POSITION_TOP => 'Над материалом',
