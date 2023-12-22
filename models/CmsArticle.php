@@ -73,8 +73,8 @@ class CmsArticle extends base\CmsArticle
 {
     public $forceOverwrite = false;
 
-    const UNPUBLISHED_STATE = 0;
-    const PUBLISHED_STATE = 1;
+    const UNPUBLISHED_STATE = false;
+    const PUBLISHED_STATE = true;
 
     const CAROUSEL_POSITION_TOP = 0;
     const CAROUSEL_POSITION_BOTTOM = 1;
