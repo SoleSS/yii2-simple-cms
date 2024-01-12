@@ -69,7 +69,8 @@ class AMP {
 
                 $videourl = [];
                 preg_match('/.*you.*\/embed\/(.*)/i', $tmp[1], $videourl);
-                $videoid = $videourl[1];
+                $videoIdParts = explode('?', $videourl[1]);
+                $videoid = $videoIdParts[0];
 
                 $res_ytvideos[] = ['orig' => $iframe_data['tag'], 'videoid' => $videoid, 'height' => $iframe_data['height'], 'width' => $iframe_data['width'], ];
                 $return = str_replace($iframe_data['tag'], '<amp-youtube '.
