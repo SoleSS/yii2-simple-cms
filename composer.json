@@ -31,10 +31,21 @@
     "kartik-v/yii2-widget-datepicker": "@dev",
     "soless/yii2-amp-helpers": "*"
   },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
 
   "autoload": {
     "psr-4": {
       "soless\\cms\\": ""
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true
     }
   }
 }
