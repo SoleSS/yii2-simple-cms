@@ -1,7 +1,7 @@
 {
   "name": "soless/yii2-simple-cms",
   "type": "yii2-extension",
-  "version": "1.2.18",
+  "version": "1.2.19",
 
   "description": "Simple CMS Module for yii2",
   "keywords": ["yii2", "CMS" ],

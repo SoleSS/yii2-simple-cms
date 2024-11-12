@@ -174,7 +174,7 @@ class CmsArticle extends base\CmsArticle
 
         if (!empty($this->full_lng2)) {
             $ampized = AMP::encode($this->full_lng2, (\Yii::$app->params['frontendFilesRoot'] ?? null));
-            $this->amp_full_lng1 = $ampized['content'];
+            $this->amp_full_lng2 = $ampized['content'];
         }
 
         return parent::beforeValidate();
